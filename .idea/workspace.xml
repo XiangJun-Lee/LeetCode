@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ea37b2b1-6656-44de-936e-14a6b70a23e1" name="Default Changelist" comment="" />
+    <list default="true" id="ea37b2b1-6656-44de-936e-14a6b70a23e1" name="Default Changelist" comment="popStack">
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/LeetCode/META-INF/LeetCode.kotlin_module" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -14,10 +19,13 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectId" id="1hSemfP2yoPV2sFACPdEVKICrxF" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
@@ -25,25 +33,27 @@
     <property name="Repository.Attach.Annotations" value="false" />
     <property name="Repository.Attach.JavaDocs" value="false" />
     <property name="Repository.Attach.Sources" value="false" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
   </component>
-  <component name="RunManager" selected="JUnit.Reverse">
+  <component name="RunManager" selected="JUnit.Main.test">
+    <configuration name="popStack" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="popStack" />
+      <module name="LeetCode" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="LevelOrder.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="LeetCode" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="LevelOrder" />
       <option name="METHOD_NAME" value="test" />
       <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Main" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="LeetCode" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="Main" />
-      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -79,10 +89,10 @@
     </configuration>
     <list>
       <item itemvalue="JUnit.Main.test" />
-      <item itemvalue="JUnit.Main" />
       <item itemvalue="JUnit.LevelOrder.test" />
       <item itemvalue="JUnit.Reverse.test" />
       <item itemvalue="JUnit.Reverse" />
+      <item itemvalue="应用程序.popStack" />
     </list>
     <recent_temporary>
       <list>
@@ -90,10 +100,10 @@
         <item itemvalue="JUnit.Reverse.test" />
         <item itemvalue="JUnit.LevelOrder.test" />
         <item itemvalue="JUnit.Main.test" />
-        <item itemvalue="JUnit.Main" />
       </list>
     </recent_temporary>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -112,62 +122,37 @@
       <workItem from="1607737550689" duration="47000" />
       <workItem from="1607765074573" duration="1638000" />
       <workItem from="1613232790315" duration="615000" />
+      <workItem from="1621309539482" duration="1831000" />
+      <workItem from="1626675467699" duration="610000" />
     </task>
+    <task id="LOCAL-00001" summary="popStack">
+      <created>1626675535095</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1626675535095</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="3" />
   </component>
-  <component name="WindowStateProjectService">
-    <state width="527" height="324" key="GridCell.Tab.0.bottom" timestamp="1607766730662">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state width="527" height="324" key="GridCell.Tab.0.bottom/0.0.1366.728/1366.0.1920.1040@0.0.1366.728" timestamp="1607766730662" />
-    <state width="527" height="600" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1604734276597" />
-    <state width="527" height="324" key="GridCell.Tab.0.center" timestamp="1607766730662">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state width="527" height="324" key="GridCell.Tab.0.center/0.0.1366.728/1366.0.1920.1040@0.0.1366.728" timestamp="1607766730662" />
-    <state width="527" height="600" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1604734276597" />
-    <state width="527" height="324" key="GridCell.Tab.0.left" timestamp="1607766730662">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state width="527" height="324" key="GridCell.Tab.0.left/0.0.1366.728/1366.0.1920.1040@0.0.1366.728" timestamp="1607766730662" />
-    <state width="527" height="600" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1604734276597" />
-    <state width="527" height="324" key="GridCell.Tab.0.right" timestamp="1607766730662">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state width="527" height="324" key="GridCell.Tab.0.right/0.0.1366.728/1366.0.1920.1040@0.0.1366.728" timestamp="1607766730662" />
-    <state width="527" height="600" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1604734276597" />
-    <state width="527" height="324" key="GridCell.Tab.1.bottom" timestamp="1607766730662">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state width="527" height="324" key="GridCell.Tab.1.bottom/0.0.1366.728/1366.0.1920.1040@0.0.1366.728" timestamp="1607766730662" />
-    <state width="527" height="600" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1604734276597" />
-    <state width="527" height="324" key="GridCell.Tab.1.center" timestamp="1607766730662">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state width="527" height="324" key="GridCell.Tab.1.center/0.0.1366.728/1366.0.1920.1040@0.0.1366.728" timestamp="1607766730662" />
-    <state width="527" height="600" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1604734276597" />
-    <state width="527" height="324" key="GridCell.Tab.1.left" timestamp="1607766730662">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state width="527" height="324" key="GridCell.Tab.1.left/0.0.1366.728/1366.0.1920.1040@0.0.1366.728" timestamp="1607766730662" />
-    <state width="527" height="600" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1604734276597" />
-    <state width="527" height="324" key="GridCell.Tab.1.right" timestamp="1607766730662">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state width="527" height="324" key="GridCell.Tab.1.right/0.0.1366.728/1366.0.1920.1040@0.0.1366.728" timestamp="1607766730662" />
-    <state width="527" height="600" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1604734276597" />
-    <state x="363" y="188" key="com.intellij.ide.util.TipDialog" timestamp="1613232792738">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="363" y="188" key="com.intellij.ide.util.TipDialog/0.0.1366.728/1366.0.1920.1040@0.0.1366.728" timestamp="1607737572876" />
-    <state x="363" y="188" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1613232792738" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1604732906749">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1604732906749" />
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="popStack" />
+    <option name="LAST_COMMIT_MESSAGE" value="popStack" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -181,6 +166,11 @@
           <url>file://$PROJECT_DIR$/src/Reverse.java</url>
           <line>10</line>
           <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/popStack.java</url>
+          <line>14</line>
+          <option name="timeStamp" value="6" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
