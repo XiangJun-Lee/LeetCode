@@ -2,10 +2,23 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ea37b2b1-6656-44de-936e-14a6b70a23e1" name="Default Changelist" comment="popStack">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/LeetCode/MaxFrequency.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/LeetCode/MinPairSum.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/LeetCode/META-INF/LeetCode.kotlin_module" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/LeetCode/LevelOrder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/LeetCode/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/LeetCode/Reverse.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/LeetCode/Test.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/LeetCode/TreeNode.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/LeetCode/com/LeetCode/demo/Exist.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/LeetCode/popStack.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/LevelOrder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/LeetCode/LevelOrder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/LeetCode/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Reverse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/LeetCode/Reverse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/LeetCode/Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TreeNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/LeetCode/TreeNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/LeetCode/demo/Exist.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/LeetCode/Exist.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/popStack.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/LeetCode/popStack.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,10 +35,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
   <component name="ProjectId" id="1hSemfP2yoPV2sFACPdEVKICrxF" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
-    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="false" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
@@ -40,28 +61,74 @@
     <property name="aspect.path.notification.shown" value="true" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
   </component>
-  <component name="RunManager" selected="JUnit.Main.test">
-    <configuration name="popStack" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="popStack" />
-      <module name="LeetCode" />
+  <component name="RunManager" selected="JUnit.MinPairSum">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="LevelOrder.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="MaxFrequency" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="LeetCode" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="LevelOrder" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.LeetCode.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.LeetCode" />
+      <option name="MAIN_CLASS_NAME" value="com.LeetCode.MaxFrequency" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MaxFrequency.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="LeetCode" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.LeetCode.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.LeetCode" />
+      <option name="MAIN_CLASS_NAME" value="com.LeetCode.MaxFrequency" />
       <option name="METHOD_NAME" value="test" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Main.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="MinPairSum" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="LeetCode" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="Main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.LeetCode.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.LeetCode" />
+      <option name="MAIN_CLASS_NAME" value="com.LeetCode.MinPairSum" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MinPairSum.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="LeetCode" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.LeetCode.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.LeetCode" />
+      <option name="MAIN_CLASS_NAME" value="com.LeetCode.MinPairSum" />
       <option name="METHOD_NAME" value="test" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
@@ -70,36 +137,27 @@
     </configuration>
     <configuration name="Reverse" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="LeetCode" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="Reverse" />
+      <option name="PACKAGE_NAME" value="com.LeetCode" />
+      <option name="MAIN_CLASS_NAME" value="com.LeetCode.Reverse" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Reverse.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="LeetCode" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="Reverse" />
-      <option name="METHOD_NAME" value="test" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <list>
-      <item itemvalue="JUnit.Main.test" />
-      <item itemvalue="JUnit.LevelOrder.test" />
-      <item itemvalue="JUnit.Reverse.test" />
       <item itemvalue="JUnit.Reverse" />
-      <item itemvalue="应用程序.popStack" />
+      <item itemvalue="JUnit.MaxFrequency.test" />
+      <item itemvalue="JUnit.MaxFrequency" />
+      <item itemvalue="JUnit.MinPairSum.test" />
+      <item itemvalue="JUnit.MinPairSum" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.MinPairSum" />
+        <item itemvalue="JUnit.MinPairSum.test" />
+        <item itemvalue="JUnit.MaxFrequency" />
+        <item itemvalue="JUnit.MaxFrequency.test" />
         <item itemvalue="JUnit.Reverse" />
-        <item itemvalue="JUnit.Reverse.test" />
-        <item itemvalue="JUnit.LevelOrder.test" />
-        <item itemvalue="JUnit.Main.test" />
       </list>
     </recent_temporary>
   </component>
@@ -124,6 +182,7 @@
       <workItem from="1613232790315" duration="615000" />
       <workItem from="1621309539482" duration="1831000" />
       <workItem from="1626675467699" duration="610000" />
+      <workItem from="1626684103591" duration="5621000" />
     </task>
     <task id="LOCAL-00001" summary="popStack">
       <created>1626675535095</created>
@@ -132,7 +191,14 @@
       <option name="project" value="LOCAL" />
       <updated>1626675535095</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="popStack">
+      <created>1626684152047</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1626684152047</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -158,19 +224,24 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/com/LeetCode/demo/Exist.java</url>
+          <url>file://$PROJECT_DIR$/src/com/LeetCode/Exist.java</url>
           <line>32</line>
           <option name="timeStamp" value="3" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Reverse.java</url>
+          <url>file://$PROJECT_DIR$/src/com/LeetCode/Reverse.java</url>
           <line>10</line>
           <option name="timeStamp" value="5" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/popStack.java</url>
+          <url>file://$PROJECT_DIR$/src/com/LeetCode/popStack.java</url>
           <line>14</line>
           <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/LeetCode/MaxFrequency.java</url>
+          <line>38</line>
+          <option name="timeStamp" value="7" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
