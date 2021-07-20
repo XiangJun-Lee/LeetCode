@@ -2,6 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ea37b2b1-6656-44de-936e-14a6b70a23e1" name="Default Changelist" comment="popStack">
+      <change afterPath="$PROJECT_DIR$/out/production/LeetCode/com/LeetCode/LevelOrder.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/LeetCode/com/LeetCode/Main.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/LeetCode/com/LeetCode/MaxFrequency.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/LeetCode/com/LeetCode/MinPairSum.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/LeetCode/com/LeetCode/Reverse.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/LeetCode/com/LeetCode/Test.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/LeetCode/com/LeetCode/TreeNode.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/LeetCode/com/LeetCode/popStack.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/LeetCode/Main.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/com/LeetCode/MaxFrequency.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/com/LeetCode/MinPairSum.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
@@ -10,10 +19,10 @@
       <change beforePath="$PROJECT_DIR$/out/production/LeetCode/Reverse.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/LeetCode/Test.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/LeetCode/TreeNode.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/LeetCode/com/LeetCode/demo/Exist.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/LeetCode/com/LeetCode/demo/Exist.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LeetCode/com/LeetCode/Exist.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/LeetCode/popStack.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/LevelOrder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/LeetCode/LevelOrder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/LeetCode/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Reverse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/LeetCode/Reverse.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/LeetCode/Test.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TreeNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/LeetCode/TreeNode.java" afterDir="false" />
@@ -59,6 +68,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
   </component>
   <component name="RunManager" selected="JUnit.MinPairSum">
@@ -182,7 +192,7 @@
       <workItem from="1613232790315" duration="615000" />
       <workItem from="1621309539482" duration="1831000" />
       <workItem from="1626675467699" duration="610000" />
-      <workItem from="1626684103591" duration="5621000" />
+      <workItem from="1626684103591" duration="5905000" />
     </task>
     <task id="LOCAL-00001" summary="popStack">
       <created>1626675535095</created>
