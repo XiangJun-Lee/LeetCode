@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ea37b2b1-6656-44de-936e-14a6b70a23e1" name="Default Changelist" comment="popStack">
-      <change afterPath="$PROJECT_DIR$/src/com/LeetCode/FindSecondMinimumValue.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/LeetCode/IsCovered.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/LeetCode/MaximumTime.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/LeetCode/TreeNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/LeetCode/TreeNode.java" afterDir="false" />
-    </list>
+    <list default="true" id="ea37b2b1-6656-44de-936e-14a6b70a23e1" name="Default Changelist" comment="popStack" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -177,6 +171,7 @@
       <workItem from="1627025511310" duration="2380000" />
       <workItem from="1627096590790" duration="910000" />
       <workItem from="1627356375478" duration="1710000" />
+      <workItem from="1630940696373" duration="223000" />
     </task>
     <task id="LOCAL-00001" summary="popStack">
       <created>1626675535095</created>
