@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ea37b2b1-6656-44de-936e-14a6b70a23e1" name="Default Changelist" comment="popStack" />
+    <list default="true" id="ea37b2b1-6656-44de-936e-14a6b70a23e1" name="Default Changelist" comment="popStack">
+      <change afterPath="$PROJECT_DIR$/.idea/leetcode/editor.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/LeetCode/BalancedStringSplit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/LeetCode/com/LeetCode/TreeNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LeetCode/com/LeetCode/TreeNode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/LeetCode/Search.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/LeetCode/Search.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -45,15 +51,13 @@
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
   </component>
   <component name="RunManager" selected="JUnit.MinPairSum">
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -171,7 +175,7 @@
       <workItem from="1627025511310" duration="2380000" />
       <workItem from="1627096590790" duration="910000" />
       <workItem from="1627356375478" duration="1710000" />
-      <workItem from="1630940696373" duration="223000" />
+      <workItem from="1631004074045" duration="1188000" />
     </task>
     <task id="LOCAL-00001" summary="popStack">
       <created>1626675535095</created>
