@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ea37b2b1-6656-44de-936e-14a6b70a23e1" name="Default Changelist" comment="popStack">
+    <list default="true" id="ea37b2b1-6656-44de-936e-14a6b70a23e1" name="Default Changelist" comment="BalancedStringSplit">
       <change afterPath="$PROJECT_DIR$/.idea/leetcode/editor.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/com/LeetCode/BalancedStringSplit.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/LeetCode/com/LeetCode/TreeNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LeetCode/com/LeetCode/TreeNode.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/LeetCode/Search.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/LeetCode/Search.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -175,7 +174,7 @@
       <workItem from="1627025511310" duration="2380000" />
       <workItem from="1627096590790" duration="910000" />
       <workItem from="1627356375478" duration="1710000" />
-      <workItem from="1631004074045" duration="1188000" />
+      <workItem from="1631004074045" duration="1433000" />
     </task>
     <task id="LOCAL-00001" summary="popStack">
       <created>1626675535095</created>
@@ -191,7 +190,14 @@
       <option name="project" value="LOCAL" />
       <updated>1626684152047</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="BalancedStringSplit">
+      <created>1631005532511</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1631005532511</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -211,7 +217,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="popStack" />
-    <option name="LAST_COMMIT_MESSAGE" value="popStack" />
+    <MESSAGE value="BalancedStringSplit" />
+    <option name="LAST_COMMIT_MESSAGE" value="BalancedStringSplit" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
