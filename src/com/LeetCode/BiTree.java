@@ -1,3 +1,5 @@
+package com.LeetCode;
+
 public class BiTree {
     private TreeNode root;
     public BiTree(){
