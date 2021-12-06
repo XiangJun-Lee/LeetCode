@@ -9,10 +9,7 @@ import org.junit.Test;
 public class TruncateSentence {
     public String truncateSentence(String s, int k) {
         for (int i = 0; i < s.length(); i++) {
-            if (s.charAt(i) == ' ') {
-                k--;
-            }
-            if (k == 0) {
+            if (s.charAt(i) == ' ' && --k == 0) {
                 return s.substring(0, i);
             }
         }
