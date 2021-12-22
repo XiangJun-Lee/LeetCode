@@ -1,65 +1,47 @@
 package com.LeetCode;
 
-import org.junit.Test;
-
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
- * @author leelixiangjun
- * @date 2021/12/15 15:45
+ * @author leeixiangjun
+ * @date 2021/12/15 10:55 下午
  */
 public class LoudAndRich {
     public int[] loudAndRich(int[][] richer, int[] quiet) {
-        int personSize = quiet.length;
-        List<Integer>[] personList = new List[personSize];
-        // 初始化richer列表
-        for (int i = 0; i < personList.length; i++) {
-            personList[i] = new ArrayList<>();
+        int n = quiet.length;
+        // 记录比自己富有的人
+        List<Integer>[] rich = new List[n];
+        for (int i = 0; i < rich.length; i++) {
+            rich[i] = new ArrayList<>(n);
         }
-        for (int[] person : richer) {
-            personList[person[1]].add(person[0]);
+        for (int i = 0; i < richer.length; i++) {
+            rich[richer[i][1]].add(richer[i][0]);
         }
-        int[] ans = new int[personSize];
-        for (int i = 0; i < personList.length; i++) {
-            ans[i] = quietest(dfs(i, personList).stream().distinct().collect(Collectors.toList()), quiet);
-        }
+        // 初始化返回值
+        int[] ans = new int[n];
+        Arrays.fill(ans, -1);
 
+        for (int i = 0; i < n; i++) {
+            dfs(i, ans, rich, quiet);
+        }
         return ans;
     }
 
-    private int quietest(List<Integer> personList, int[] quiet) {
-        int ans = Integer.MAX_VALUE;
-        int min = Integer.MAX_VALUE;
-        for (Integer i : personList) {
-            if (min > quiet[i]) {
-                min = quiet[i];
-                ans = i;
+    private void dfs(int x, int[] ans, List<Integer>[] rich, int[] quiet) {
+        if (ans[x] != -1) {
+            return;
+        }
+        // 将安静值最小的先设置为自己
+        ans[x] = x;
+        for (Integer y : rich[x]) {
+            // 递归比自己富有的人
+            dfs(y, ans, rich, quiet);
+            // 比较
+            if (quiet[ans[x]] > quiet[ans[y]]) {
+                ans[x] = ans[y];
             }
         }
-        return ans;
-    }
-
-    private List<Integer> dfs(int person, List<Integer>[] personList) {
-        if (personList[person].size() == 0) {
-            return Collections.singletonList(person);
-        }
-        List<Integer> richerPerson = new ArrayList<>();
-        richerPerson.addAll(personList[person]);
-        richerPerson.add(person);
-        for (Integer p : personList[person]) {
-            richerPerson.addAll(dfs(p, personList));
-        }
-        return richerPerson.stream().distinct().collect(Collectors.toList());
-    }
-
-    @Test
-    public void test() {
-        int[][] richer = {{1, 0}, {2, 1}, {3, 1}, {3, 7}, {4, 3}, {5, 3}, {6, 3}};
-        int[] quiet = {3, 2, 5, 4, 6, 1, 7, 0};
-        System.out.println(Arrays.toString(loudAndRich(richer, quiet)));
     }
 }
