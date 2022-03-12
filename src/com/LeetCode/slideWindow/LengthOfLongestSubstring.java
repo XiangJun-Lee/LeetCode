@@ -1,4 +1,4 @@
-package com.LeetCode.SlideWindow;
+package com.LeetCode.slideWindow;
 
 import org.junit.Test;
 

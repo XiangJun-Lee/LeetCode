@@ -1,11 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ea37b2b1-6656-44de-936e-14a6b70a23e1" name="Default Changelist" comment="BalancedStringSplit">
-      <change afterPath="$PROJECT_DIR$/src/com/LeetCode/March/March2.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/leetcode/editor.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/leetcode/editor.xml" afterDir="false" />
+    <list default="true" id="ea37b2b1-6656-44de-936e-14a6b70a23e1" name="Default Changelist" comment="每日一题9号 超时">
+      <change afterPath="$PROJECT_DIR$/src/com/LeetCode/March/March10.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/LeetCode/March/March12.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/LeetCode/March/Node.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/LeetCode/dfs/SearchRange.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/LeetCode/offer/Search.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/LeetCode/March/March1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/LeetCode/March/March1.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/LeetCode/Dynamic/CanJump.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/LeetCode/dynamic/CanJump.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/LeetCode/Dynamic/ClimbStairs.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/LeetCode/dynamic/ClimbStairs.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/LeetCode/Dynamic/Fib.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/LeetCode/dynamic/Fib.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/LeetCode/Dynamic/GetMaxLen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/LeetCode/dynamic/GetMaxLen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/LeetCode/Dynamic/Jump.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/LeetCode/dynamic/Jump.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/LeetCode/Dynamic/LongestPalindrome.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/LeetCode/dynamic/LongestPalindrome.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/LeetCode/Dynamic/MaxProduct.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/LeetCode/dynamic/MaxProduct.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/LeetCode/Dynamic/MaxScoreSightseeingPair.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/LeetCode/dynamic/MaxScoreSightseeingPair.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/LeetCode/Dynamic/MaxSubarraySumCircular.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/LeetCode/dynamic/MaxSubarraySumCircular.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/LeetCode/Dynamic/MinCostClimbingStairs.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/LeetCode/dynamic/MinCostClimbingStairs.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/LeetCode/Dynamic/Tribonacci.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/LeetCode/dynamic/Tribonacci.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/LeetCode/Dynamic/UniquePaths.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/LeetCode/dynamic/UniquePaths.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/LeetCode/SlideWindow/LengthOfLongestSubstring.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/LeetCode/slideWindow/LengthOfLongestSubstring.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,7 +65,7 @@
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
   </component>
-  <component name="RunManager" selected="JUnit.March2.test">
+  <component name="RunManager" selected="JUnit.Search">
     <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
@@ -63,7 +79,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="March2" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="March9" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="LeetCode" />
       <extension name="coverage">
         <pattern>
@@ -72,68 +88,68 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.LeetCode.March" />
-      <option name="MAIN_CLASS_NAME" value="com.LeetCode.March.March2" />
+      <option name="MAIN_CLASS_NAME" value="com.LeetCode.March.March9" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="March2.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="Search" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="LeetCode" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.LeetCode.March.*" />
+          <option name="PATTERN" value="com.LeetCode.offer.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.LeetCode.March" />
-      <option name="MAIN_CLASS_NAME" value="com.LeetCode.March.March2" />
+      <option name="PACKAGE_NAME" value="com.LeetCode.offer" />
+      <option name="MAIN_CLASS_NAME" value="com.LeetCode.offer.Search" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SearchRange" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="LeetCode" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.LeetCode.dfs.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.LeetCode.dfs" />
+      <option name="MAIN_CLASS_NAME" value="com.LeetCode.dfs.SearchRange" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SearchRange.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="LeetCode" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.LeetCode.dfs.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.LeetCode.dfs" />
+      <option name="MAIN_CLASS_NAME" value="com.LeetCode.dfs.SearchRange" />
       <option name="METHOD_NAME" value="test" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MaxFrequency" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="Search.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="LeetCode" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.LeetCode.*" />
+          <option name="PATTERN" value="com.LeetCode.offer.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.LeetCode" />
-      <option name="MAIN_CLASS_NAME" value="com.LeetCode.MaxFrequency" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="MinPairSum" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="LeetCode" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.LeetCode.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.LeetCode" />
-      <option name="MAIN_CLASS_NAME" value="com.LeetCode.MinPairSum" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="MinPairSum.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="LeetCode" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.LeetCode.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.LeetCode" />
-      <option name="MAIN_CLASS_NAME" value="com.LeetCode.MinPairSum" />
+      <option name="PACKAGE_NAME" value="com.LeetCode.offer" />
+      <option name="MAIN_CLASS_NAME" value="com.LeetCode.offer.Search" />
       <option name="METHOD_NAME" value="test" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
@@ -141,19 +157,19 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="JUnit.MaxFrequency" />
-      <item itemvalue="JUnit.MinPairSum.test" />
-      <item itemvalue="JUnit.MinPairSum" />
-      <item itemvalue="JUnit.March2.test" />
-      <item itemvalue="JUnit.March2" />
+      <item itemvalue="JUnit.March9" />
+      <item itemvalue="JUnit.SearchRange" />
+      <item itemvalue="JUnit.SearchRange.test" />
+      <item itemvalue="JUnit.Search.test" />
+      <item itemvalue="JUnit.Search" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.March2.test" />
-        <item itemvalue="JUnit.March2" />
-        <item itemvalue="JUnit.MinPairSum" />
-        <item itemvalue="JUnit.MinPairSum.test" />
-        <item itemvalue="JUnit.MaxFrequency" />
+        <item itemvalue="JUnit.Search" />
+        <item itemvalue="JUnit.Search.test" />
+        <item itemvalue="JUnit.SearchRange" />
+        <item itemvalue="JUnit.SearchRange.test" />
+        <item itemvalue="JUnit.March9" />
       </list>
     </recent_temporary>
   </component>
@@ -183,6 +199,11 @@
       <workItem from="1627096590790" duration="910000" />
       <workItem from="1627356375478" duration="1710000" />
       <workItem from="1631004074045" duration="1433000" />
+      <workItem from="1646745774613" duration="3543000" />
+      <workItem from="1646877886869" duration="3290000" />
+      <workItem from="1646895559760" duration="32000" />
+      <workItem from="1646916731392" duration="584000" />
+      <workItem from="1647056467461" duration="142000" />
     </task>
     <task id="LOCAL-00001" summary="popStack">
       <created>1626675535095</created>
@@ -205,7 +226,42 @@
       <option name="project" value="LOCAL" />
       <updated>1631005532511</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="全排列">
+      <created>1646321317039</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1646321317039</updated>
+    </task>
+    <task id="LOCAL-00005" summary="动态规划">
+      <created>1646493690029</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1646493690029</updated>
+    </task>
+    <task id="LOCAL-00006" summary="每日一题">
+      <created>1646533894346</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1646533894346</updated>
+    </task>
+    <task id="LOCAL-00007" summary="每日一题8号">
+      <created>1646723079466</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1646723079466</updated>
+    </task>
+    <task id="LOCAL-00008" summary="每日一题9号">
+      <created>1646813371328</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1646813371329</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -226,7 +282,12 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="popStack" />
     <MESSAGE value="BalancedStringSplit" />
-    <option name="LAST_COMMIT_MESSAGE" value="BalancedStringSplit" />
+    <MESSAGE value="全排列" />
+    <MESSAGE value="动态规划" />
+    <MESSAGE value="每日一题" />
+    <MESSAGE value="每日一题8号" />
+    <MESSAGE value="每日一题9号" />
+    <option name="LAST_COMMIT_MESSAGE" value="每日一题9号" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -266,7 +327,60 @@
           <line>27</line>
           <option name="timeStamp" value="21" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/LeetCode/dynamic/CanJump.java</url>
+          <line>18</line>
+          <option name="timeStamp" value="22" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/LeetCode/dynamic/Jump.java</url>
+          <line>12</line>
+          <option name="timeStamp" value="24" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/LeetCode/dynamic/MaxProduct.java</url>
+          <line>11</line>
+          <option name="timeStamp" value="25" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/LeetCode/dynamic/GetMaxLen.java</url>
+          <line>31</line>
+          <option name="timeStamp" value="27" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/LeetCode/March/March9.java</url>
+          <line>18</line>
+          <option name="timeStamp" value="30" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/LeetCode/dfs/SearchRange.java</url>
+          <line>20</line>
+          <option name="timeStamp" value="32" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/LeetCode/offer/Search.java</url>
+          <line>21</line>
+          <option name="timeStamp" value="34" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/LeetCode/offer/Search.java</url>
+          <line>11</line>
+          <option name="timeStamp" value="37" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/com/LeetCode/dynamic/CanJump.java</url>
+          <line>9</line>
+          <properties class="com.LeetCode.dynamic.CanJump" method="canJump">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="23" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/LeetCode$MaxSumOfThreeSubarrays.ic" NAME="MaxSumOfThreeSubarrays 覆盖结果" MODIFIED="1638975875199" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.LeetCode.*</FILTER>
+    </SUITE>
   </component>
 </project>

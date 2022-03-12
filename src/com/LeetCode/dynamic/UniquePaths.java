@@ -1,4 +1,4 @@
-package com.LeetCode.Dynamic;
+package com.LeetCode.dynamic;
 
 import org.junit.Test;
 
