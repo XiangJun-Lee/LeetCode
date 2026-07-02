@@ -80,15 +80,16 @@ For Single Problem Mode:
 2. Continue with that single problem.
 
 For Knowledge Point Mode:
-1. Browse current LeetCode and reliable curated sources to identify high-frequency problems for the requested knowledge point. Prefer LeetCode China topic/tag pages, official lists such as 热题 100 or 面试经典, and widely accepted curated lists when official frequency data is not exposed.
-2. Rank candidates by frequency signals: appearance across official/curated high-frequency lists, topic/tag match quality, interview-list presence, and community consensus.
-3. Prefer classic representative problems that directly exercise the requested knowledge point over loosely related problems.
-4. Verify each candidate's problem number, title, slug, URL, tags, examples, constraints, and official solution availability before generation.
-5. Compare verified candidates with existing study folders and `leetcode-problem-bank.html` entries.
-6. Select up to `num` high-frequency uncompleted verified problems, defaulting to `1` when omitted.
-7. If fewer than `num` uncompleted problems are available, generate the available uncompleted problems and report the shortfall.
-8. If zero uncompleted problems are available, present up to five completed verified candidates sorted by frequency, ask the user whether to review one or more of them, and wait for the user's choice before changing files.
-9. Keep a short source note for the selection and include relevant links in each generated `index.html`.
+1. Build the LeetCode China search URL `https://leetcode.cn/search/?q=<url-encoded knowledge point>` and use it as the first lookup source for the requested knowledge point.
+2. Browse current LeetCode and reliable curated sources to identify high-frequency problems for the requested knowledge point. Prefer the LeetCode China search results, LeetCode China topic/tag pages, official lists such as 热题 100 or 面试经典, and widely accepted curated lists when official frequency data is not exposed.
+3. Rank candidates by frequency signals: appearance across official/curated high-frequency lists, topic/tag match quality, search-result relevance, interview-list presence, and community consensus.
+4. Prefer classic representative problems that directly exercise the requested knowledge point over loosely related problems.
+5. Verify each candidate's problem number, title, slug, URL, tags, examples, constraints, and official solution availability before generation.
+6. Compare verified candidates with existing study folders and `leetcode-problem-bank.html` entries.
+7. Select up to `num` high-frequency uncompleted verified problems, defaulting to `1` when omitted.
+8. If fewer than `num` uncompleted problems are available, generate the available uncompleted problems and report the shortfall.
+9. If zero uncompleted problems are available, present up to five completed verified candidates sorted by frequency, ask the user whether to review one or more of them, and wait for the user's choice before changing files.
+10. Keep a short source note for the selection and include relevant links in each generated `index.html`.
 
 ### 4. Read And Verify Each LeetCode Problem
 
