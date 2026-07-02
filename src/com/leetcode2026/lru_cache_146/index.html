@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LeetCode 146 - LRU 缓存</title>
+  <style>
+    :root {
+      --bg: #f6f8fb;
+      --panel: #ffffff;
+      --ink: #172033;
+      --muted: #667085;
+      --line: #d8deea;
+      --blue: #2563eb;
+      --blue-soft: #dbeafe;
+      --green: #15803d;
+      --green-soft: #dcfce7;
+      --orange: #c2410c;
+      --orange-soft: #ffedd5;
+      --red: #b91c1c;
+      --red-soft: #fee2e2;
+      --code-bg: #0b1020;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--bg);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif;
+      line-height: 1.65;
+    }
+
+    header {
+      padding: 42px 20px 34px;
+      color: #fff;
+      background: linear-gradient(135deg, #1e40af 0%, #047857 100%);
+    }
+
+    .wrap {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 24px;
+      align-items: end;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+    }
+
+    h1 {
+      margin-bottom: 10px;
+      font-size: clamp(30px, 5vw, 46px);
+      line-height: 1.15;
+      letter-spacing: 0;
+    }
+
+    h2 {
+      margin-bottom: 16px;
+      font-size: 24px;
+    }
+
+    h3 {
+      margin-bottom: 8px;
+      font-size: 18px;
+    }
+
+    a {
+      color: var(--blue);
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .subtitle {
+      max-width: 780px;
+      margin-bottom: 0;
+      color: rgba(255, 255, 255, 0.86);
+      font-size: 17px;
+    }
+
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 20px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      color: #063f3a;
+      background: #d9fffb;
+      font-size: 13px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .hero-score {
+      min-width: 170px;
+      padding: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.32);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    .hero-score strong {
+      display: block;
+      font-size: 34px;
+      line-height: 1;
+    }
+
+    .hero-score span {
+      display: block;
+      margin-top: 8px;
+      color: rgba(255, 255, 255, 0.84);
+      font-size: 13px;
+    }
+
+    main {
+      padding: 28px 0 56px;
+    }
+
+    section {
+      margin-top: 18px;
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .three-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .note {
+      padding: 14px 16px;
+      border-left: 4px solid var(--blue);
+      border-radius: 6px;
+      background: var(--blue-soft);
+    }
+
+    .ok {
+      border-left-color: var(--green);
+      background: var(--green-soft);
+    }
+
+    .warn {
+      border-left-color: var(--orange);
+      background: var(--orange-soft);
+    }
+
+    .danger {
+      border-left-color: var(--red);
+      background: var(--red-soft);
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    code {
+      padding: 2px 5px;
+      border-radius: 5px;
+      color: #0f3f8f;
+      background: #eef4ff;
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      font-size: 0.94em;
+    }
+
+    pre {
+      overflow: auto;
+      margin: 14px 0 0;
+      padding: 18px;
+      border-radius: 8px;
+      color: #e5e7eb;
+      background: var(--code-bg);
+      line-height: 1.55;
+    }
+
+    pre code {
+      padding: 0;
+      color: inherit;
+      background: transparent;
+      font-size: 14px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+    }
+
+    th,
+    td {
+      padding: 11px 12px;
+      border: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: #eef3fb;
+    }
+
+    ul,
+    ol {
+      padding-left: 22px;
+      margin-top: 8px;
+      margin-bottom: 0;
+    }
+
+    li + li {
+      margin-top: 6px;
+    }
+
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .flow div {
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfcff;
+      text-align: center;
+      font-weight: 800;
+    }
+
+    .demo {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(290px, 0.85fr);
+      gap: 18px;
+      align-items: start;
+    }
+
+    .cache-line {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+      min-height: 72px;
+      padding: 16px;
+      border: 1px dashed #9fb0ca;
+      border-radius: 8px;
+      background: #fbfcff;
+    }
+
+    .node {
+      min-width: 86px;
+      padding: 10px 12px;
+      border: 1px solid #93c5fd;
+      border-radius: 8px;
+      background: var(--blue-soft);
+      text-align: center;
+      font-weight: 800;
+    }
+
+    .node small {
+      display: block;
+      margin-top: 3px;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .arrow {
+      color: #64748b;
+      font-weight: 900;
+    }
+
+    .state-panel {
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfcff;
+    }
+
+    .state-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin: 14px 0;
+    }
+
+    .metric {
+      padding: 12px;
+      border: 1px solid #d8e0ec;
+      border-radius: 7px;
+      background: #fff;
+    }
+
+    .metric span {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .metric strong {
+      display: block;
+      margin-top: 4px;
+      font-size: 20px;
+    }
+
+    .map-view {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      min-height: 34px;
+      margin-top: 8px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 3px 9px;
+      border-radius: 999px;
+      color: #0f5132;
+      background: var(--green-soft);
+      font-weight: 800;
+    }
+
+    .step-text {
+      min-height: 88px;
+      margin-top: 12px;
+      padding: 12px;
+      border-radius: 7px;
+      background: #f0f4fa;
+    }
+
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    button {
+      min-height: 38px;
+      padding: 8px 14px;
+      border: 1px solid #b6c3d8;
+      border-radius: 7px;
+      color: #102033;
+      background: #fff;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    button.primary {
+      border-color: var(--blue);
+      color: #fff;
+      background: var(--blue);
+    }
+
+    button:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+
+    footer {
+      padding: 20px;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    @media (max-width: 860px) {
+      .hero,
+      .grid,
+      .three-grid,
+      .flow,
+      .demo {
+        grid-template-columns: 1fr;
+      }
+
+      section {
+        padding: 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap hero">
+      <div>
+        <h1>LeetCode 146：LRU 缓存</h1>
+        <p class="subtitle">设计一个缓存：最近使用过的数据优先保留，容量满时淘汰最久未使用的数据。关键是让 <code>get</code> 和 <code>put</code> 都达到平均 O(1)。</p>
+        <div class="badge-row">
+          <span class="badge">Java</span>
+          <span class="badge">HashMap</span>
+          <span class="badge">双向链表</span>
+          <span class="badge">设计题</span>
+        </div>
+      </div>
+      <div class="hero-score">
+        <strong>O(1)</strong>
+        <span>get / put 平均时间复杂度</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section>
+      <h2>题目概述</h2>
+      <div class="grid">
+        <div>
+          <p>实现 <code>LRUCache</code> 类，支持两个操作：</p>
+          <ul>
+            <li><code>get(key)</code>：如果 key 存在，返回 value，并把它标记为最近使用；否则返回 <code>-1</code>。</li>
+            <li><code>put(key, value)</code>：插入或更新 key。如果容量超限，淘汰最久未使用的 key。</li>
+          </ul>
+        </div>
+        <div class="note">
+          <h3>LRU 是什么</h3>
+          <p>Least Recently Used，最久未使用。每次访问或写入一个 key，这个 key 都变成“最近使用”。容量满时，删除“最久没被碰过”的 key。</p>
+        </div>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>操作</th>
+            <th>返回</th>
+            <th>缓存状态（最近 → 最久）</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>put(1,1)</code>, <code>put(2,2)</code></td>
+            <td>-</td>
+            <td><code>2:2 → 1:1</code></td>
+          </tr>
+          <tr>
+            <td><code>get(1)</code></td>
+            <td><code>1</code></td>
+            <td><code>1:1 → 2:2</code></td>
+          </tr>
+          <tr>
+            <td><code>put(3,3)</code></td>
+            <td>-</td>
+            <td><code>3:3 → 1:1</code>，key 2 被淘汰</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>考察知识点</h2>
+      <div class="three-grid">
+        <div class="note ok">
+          <h3>HashMap</h3>
+          <p>用 key 直接定位链表节点，保证查找、更新、删除入口都是 O(1)。</p>
+        </div>
+        <div class="note">
+          <h3>双向链表</h3>
+          <p>把最近使用的节点移动到头部，把最久未使用的节点放在尾部附近。</p>
+        </div>
+        <div class="note warn">
+          <h3>数据结构设计</h3>
+          <p>这题不是单个 API 调用，而是维护多个操作之间一致的数据结构状态。</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>官方方案对照</h2>
+      <p>LeetCode 官方题解使用的是 <strong>哈希表 + 双向链表</strong>：哈希表负责通过 key 找节点，双向链表负责维护最近使用顺序。这个页面讲解的也是同一个最优方案。</p>
+      <div class="grid">
+        <div class="note ok">
+          <h3>为什么等价于官方最优解</h3>
+          <p>每个 key 在 HashMap 中对应一个链表节点。访问或写入成功后，把节点移到链表头部；容量超限时，删除尾部节点，并同步从 HashMap 删除。</p>
+        </div>
+        <div class="note warn">
+          <h3>为什么不用单 HashMap</h3>
+          <p>HashMap 能 O(1) 找 key，但无法 O(1) 知道谁最久未使用；单链表能维护顺序，但无法 O(1) 删除任意节点。</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>核心思路</h2>
+      <div class="flow">
+        <div>HashMap 找节点</div>
+        <div>访问后移到头部</div>
+        <div>容量满删尾部</div>
+        <div>Map 和链表同步</div>
+      </div>
+      <p style="margin-top: 16px;">可以把双向链表看成一条队伍：队头是最近使用，队尾是最久未使用。为了避免处理空链表、头尾删除等边界，常用两个哨兵节点 <code>head</code> 和 <code>tail</code>。</p>
+    </section>
+
+    <section>
+      <h2>Java 参考实现</h2>
+      <pre><code>import java.util.HashMap;
+import java.util.Map;
+
+class LRUCache {
+    // 双向链表节点：key 用于淘汰时回删 HashMap，value 是缓存值。
+    private static class Node {
+        int key;
+        int value;
+        Node prev;
+        Node next;
+
+        Node() {
+        }
+
+        Node(int key, int value) {
+            this.key = key;
+            this.value = value;
+        }
+    }
+
+    private final int capacity;
+
+    // cache 负责 O(1) 通过 key 找到链表节点。
+    private final Map&lt;Integer, Node&gt; cache = new HashMap&lt;&gt;();
+
+    // head 和 tail 是哨兵节点，不存真实数据。
+    // head.next 永远是最近使用的节点，tail.prev 永远是最久未使用的节点。
+    private final Node head = new Node();
+    private final Node tail = new Node();
+
+    public LRUCache(int capacity) {
+        this.capacity = capacity;
+
+        // 初始化空链表：head &lt;-&gt; tail。
+        // 有哨兵后，插入和删除时不用单独判断空链表或首尾节点。
+        head.next = tail;
+        tail.prev = head;
+    }
+
+    public int get(int key) {
+        Node node = cache.get(key);
+        if (node == null) {
+            return -1;
+        }
+
+        // 被访问过的 key 变成最近使用，所以移动到链表头部。
+        moveToHead(node);
+        return node.value;
+    }
+
+    public void put(int key, int value) {
+        Node node = cache.get(key);
+        if (node != null) {
+            // 已存在的 key 只更新值，不创建新节点；随后刷新使用顺序。
+            node.value = value;
+            moveToHead(node);
+            return;
+        }
+
+        // 新 key 同时写入 HashMap 和双向链表。
+        // 链表头部代表最近使用，因此新节点直接放到 head 后面。
+        Node created = new Node(key, value);
+        cache.put(key, created);
+        addToHead(created);
+
+        if (cache.size() &gt; capacity) {
+            // 超容量时淘汰 tail 前面的真实节点，也就是最久未使用节点。
+            // 删除链表节点后，必须同步删除 HashMap 中的 key。
+            Node removed = removeTail();
+            cache.remove(removed.key);
+        }
+    }
+
+    private void moveToHead(Node node) {
+        // 移动节点分两步：先从原位置摘掉，再插入到头部。
+        removeNode(node);
+        addToHead(node);
+    }
+
+    private void addToHead(Node node) {
+        // 把 node 插入到 head 和原 head.next 之间。
+        node.prev = head;
+        node.next = head.next;
+        head.next.prev = node;
+        head.next = node;
+    }
+
+    private void removeNode(Node node) {
+        // 因为有哨兵节点，node 一定有 prev 和 next，直接改两侧指针即可。
+        node.prev.next = node.next;
+        node.next.prev = node.prev;
+    }
+
+    private Node removeTail() {
+        // tail.prev 是当前最久未使用的真实节点。
+        Node node = tail.prev;
+        removeNode(node);
+        return node;
+    }
+}</code></pre>
+    </section>
+
+    <section>
+      <h2>变量和方法职责</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>成员/方法</th>
+            <th>作用</th>
+            <th>易错点</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>cache</code></td>
+            <td>key 到 Node 的映射</td>
+            <td>删除尾节点时必须同步删除 map 中的 key</td>
+          </tr>
+          <tr>
+            <td><code>head.next</code></td>
+            <td>最近使用的真实节点</td>
+            <td>访问或更新 key 后要移动到这里</td>
+          </tr>
+          <tr>
+            <td><code>tail.prev</code></td>
+            <td>最久未使用的真实节点</td>
+            <td>容量超限时淘汰它，而不是刚插入的节点</td>
+          </tr>
+          <tr>
+            <td><code>moveToHead</code></td>
+            <td>先摘除节点，再插入头部</td>
+            <td>不能只改一边指针，双向关系要成对维护</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>执行过程可视化</h2>
+      <p class="muted">容量为 <code>2</code>，链表展示为“最近使用 → 最久未使用”。</p>
+      <div class="demo">
+        <div>
+          <div class="cache-line" id="cacheLine"></div>
+          <div class="controls">
+            <button id="prevBtn">上一步</button>
+            <button id="nextBtn" class="primary">下一步</button>
+            <button id="resetBtn">重置</button>
+          </div>
+        </div>
+        <aside class="state-panel">
+          <h3>当前操作</h3>
+          <div class="state-grid">
+            <div class="metric">
+              <span>步骤</span>
+              <strong id="stepValue">0</strong>
+            </div>
+            <div class="metric">
+              <span>返回值</span>
+              <strong id="returnValue">-</strong>
+            </div>
+          </div>
+          <h3>HashMap 中的 key</h3>
+          <div class="map-view" id="mapView"></div>
+          <div class="step-text" id="stepText"></div>
+        </aside>
+      </div>
+    </section>
+
+    <section>
+      <h2>练习文件</h2>
+      <div class="grid">
+        <div class="note">
+          <h3>LRUCache.java</h3>
+          <p>这是你的练习入口，只保留 LeetCode 需要的类和方法，不包含提示。</p>
+        </div>
+        <div class="note ok">
+          <h3>LRUCacheTest.java</h3>
+          <p>测试用例不依赖 JUnit。从项目 <code>src</code> 目录运行：</p>
+          <p><code>javac com/leetcode2026/lru_cache_146/LRUCache.java com/leetcode2026/lru_cache_146/LRUCacheTest.java &amp;&amp; java com.leetcode2026.lru_cache_146.LRUCacheTest</code></p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>易错点</h2>
+      <ol>
+        <li><strong>get 后忘记刷新使用顺序：</strong>命中 key 后必须移动到头部。</li>
+        <li><strong>put 更新旧 key 时只改 value：</strong>更新也算使用，需要移动到头部。</li>
+        <li><strong>链表删了，Map 没删：</strong>之后 get 会拿到已经不在链表中的旧节点。</li>
+        <li><strong>指针更新顺序错：</strong>双向链表插入/删除要同时维护前驱和后继。</li>
+        <li><strong>不用哨兵节点：</strong>头尾边界会变复杂，容易漏掉容量为 1 的情况。</li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>复杂度分析</h2>
+      <div class="grid">
+        <div class="note ok">
+          <h3>时间复杂度：O(1)</h3>
+          <p><code>get</code> 和 <code>put</code> 都只做 HashMap 查询、常数次链表指针修改。</p>
+        </div>
+        <div class="note">
+          <h3>空间复杂度：O(capacity)</h3>
+          <p>最多保存 <code>capacity</code> 个节点，HashMap 和链表节点数量同阶。</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>来源</h2>
+      <ul>
+        <li><a href="https://leetcode.cn/problems/lru-cache/">LeetCode 146 题目页</a></li>
+        <li><a href="https://leetcode.cn/problems/lru-cache/solutions/259678/lruhuan-cun-ji-zhi-by-leetcode-solution/">LeetCode 官方题解</a></li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <a href="../leetcode-problem-bank.html">返回 LeetCode 题库</a>
+  </footer>
+
+  <script>
+    const states = [
+      {
+        op: "初始化 LRUCache(2)",
+        list: [],
+        result: "-",
+        text: "缓存为空，容量为 2。head 和 tail 是哨兵节点，不存真实数据。"
+      },
+      {
+        op: "put(1, 1)",
+        list: [[1, 1]],
+        result: "-",
+        text: "插入 key 1，新节点放到头部，表示最近使用。"
+      },
+      {
+        op: "put(2, 2)",
+        list: [[2, 2], [1, 1]],
+        result: "-",
+        text: "插入 key 2，key 2 成为最近使用，key 1 变成更久未使用。"
+      },
+      {
+        op: "get(1)",
+        list: [[1, 1], [2, 2]],
+        result: "1",
+        text: "命中 key 1，返回 1，并把 key 1 移到头部。"
+      },
+      {
+        op: "put(3, 3)",
+        list: [[3, 3], [1, 1]],
+        result: "-",
+        text: "插入 key 3 后容量超限，尾部 key 2 是最久未使用，淘汰 key 2。"
+      },
+      {
+        op: "get(2)",
+        list: [[3, 3], [1, 1]],
+        result: "-1",
+        text: "key 2 已经被淘汰，返回 -1，缓存顺序不变。"
+      },
+      {
+        op: "put(4, 4)",
+        list: [[4, 4], [3, 3]],
+        result: "-",
+        text: "插入 key 4 后容量超限，尾部 key 1 最久未使用，淘汰 key 1。"
+      },
+      {
+        op: "get(1)",
+        list: [[4, 4], [3, 3]],
+        result: "-1",
+        text: "key 1 已经被淘汰，返回 -1。"
+      },
+      {
+        op: "get(3)",
+        list: [[3, 3], [4, 4]],
+        result: "3",
+        text: "命中 key 3，返回 3，并把 key 3 移到头部。"
+      },
+      {
+        op: "get(4)",
+        list: [[4, 4], [3, 3]],
+        result: "4",
+        text: "命中 key 4，返回 4，并把 key 4 移到头部。"
+      }
+    ];
+
+    const cacheLine = document.getElementById("cacheLine");
+    const mapView = document.getElementById("mapView");
+    const stepText = document.getElementById("stepText");
+    const stepValue = document.getElementById("stepValue");
+    const returnValue = document.getElementById("returnValue");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    const resetBtn = document.getElementById("resetBtn");
+    let index = 0;
+
+    function render() {
+      const state = states[index];
+      cacheLine.innerHTML = "";
+
+      if (state.list.length === 0) {
+        const empty = document.createElement("span");
+        empty.className = "muted";
+        empty.textContent = "空缓存";
+        cacheLine.appendChild(empty);
+      } else {
+        state.list.forEach((entry, i) => {
+          const node = document.createElement("div");
+          node.className = "node";
+          node.innerHTML = `key ${entry[0]}<small>value ${entry[1]}</small>`;
+          cacheLine.appendChild(node);
+          if (i < state.list.length - 1) {
+            const arrow = document.createElement("span");
+            arrow.className = "arrow";
+            arrow.textContent = "→";
+            cacheLine.appendChild(arrow);
+          }
+        });
+      }
+
+      mapView.innerHTML = "";
+      if (state.list.length === 0) {
+        const empty = document.createElement("span");
+        empty.className = "muted";
+        empty.textContent = "空";
+        mapView.appendChild(empty);
+      } else {
+        state.list.forEach((entry) => {
+          const pill = document.createElement("span");
+          pill.className = "pill";
+          pill.textContent = `${entry[0]} → Node`;
+          mapView.appendChild(pill);
+        });
+      }
+
+      stepValue.textContent = `${index}`;
+      returnValue.textContent = state.result;
+      stepText.textContent = `${state.op}：${state.text}`;
+      prevBtn.disabled = index === 0;
+      nextBtn.disabled = index === states.length - 1;
+    }
+
+    prevBtn.addEventListener("click", () => {
+      if (index > 0) {
+        index--;
+        render();
+      }
+    });
+
+    nextBtn.addEventListener("click", () => {
+      if (index < states.length - 1) {
+        index++;
+        render();
+      }
+    });
+
+    resetBtn.addEventListener("click", () => {
+      index = 0;
+      render();
+    });
+
+    render();
+  </script>
+</body>
+</html>

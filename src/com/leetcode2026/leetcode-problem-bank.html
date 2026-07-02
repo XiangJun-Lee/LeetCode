@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LeetCode 题库</title>
+  <style>
+    :root {
+      --bg: #f6f8fb;
+      --panel: #ffffff;
+      --ink: #172033;
+      --muted: #667085;
+      --line: #d8deea;
+      --blue: #2563eb;
+      --blue-soft: #dbeafe;
+      --green-soft: #dcfce7;
+      --orange-soft: #ffedd5;
+      --violet-soft: #ede9fe;
+      --slate-soft: #eef2f7;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--bg);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif;
+      line-height: 1.65;
+    }
+
+    header {
+      padding: 42px 20px 30px;
+      color: #fff;
+      background: linear-gradient(135deg, #1e40af 0%, #047857 100%);
+    }
+
+    .wrap {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+    }
+
+    h1 {
+      margin-bottom: 10px;
+      font-size: clamp(30px, 5vw, 46px);
+      line-height: 1.15;
+      letter-spacing: 0;
+    }
+
+    h2 {
+      margin-bottom: 14px;
+      font-size: 24px;
+    }
+
+    h3 {
+      margin-bottom: 8px;
+      font-size: 19px;
+    }
+
+    a {
+      color: var(--blue);
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .subtitle {
+      max-width: 780px;
+      margin-bottom: 0;
+      color: rgba(255, 255, 255, 0.86);
+      font-size: 17px;
+    }
+
+    main {
+      padding: 28px 0 56px;
+    }
+
+    section {
+      margin-top: 18px;
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .stat {
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfcff;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 30px;
+      line-height: 1;
+    }
+
+    .stat span {
+      display: block;
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .directory {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+    }
+
+    .directory th,
+    .directory td,
+    .problem-table th,
+    .problem-table td {
+      padding: 12px;
+      border: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .directory th,
+    .problem-table th {
+      background: #eef3fb;
+    }
+
+    .topic-section {
+      margin-top: 18px;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfcff;
+    }
+
+    .topic-section:nth-child(4n + 1) {
+      background: var(--blue-soft);
+    }
+
+    .topic-section:nth-child(4n + 2) {
+      background: var(--green-soft);
+    }
+
+    .topic-section:nth-child(4n + 3) {
+      background: var(--orange-soft);
+    }
+
+    .topic-section:nth-child(4n + 4) {
+      background: var(--violet-soft);
+    }
+
+    .topic-meta {
+      margin-bottom: 10px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .method {
+      margin-bottom: 12px;
+      padding: 12px 14px;
+      border-left: 4px solid var(--blue);
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.72);
+    }
+
+    .problem-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+      background: #fff;
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 3px 9px;
+      border-radius: 999px;
+      color: #0f315f;
+      background: #e0edff;
+      font-size: 13px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    code {
+      padding: 2px 5px;
+      border-radius: 5px;
+      color: #0f3f8f;
+      background: #eef4ff;
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      font-size: 0.94em;
+    }
+
+    footer {
+      padding: 20px;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    @media (max-width: 760px) {
+      .stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      section {
+        padding: 18px;
+      }
+
+      .directory,
+      .problem-table {
+        display: block;
+        overflow-x: auto;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .stats {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <h1>LeetCode 题库</h1>
+      <p class="subtitle">按照考察点沉淀题目、方法规律和练习入口。考察点按题目覆盖频率降序排列。</p>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section aria-labelledby="progress-title">
+      <h2 id="progress-title">进度</h2>
+      <div class="stats">
+        <div class="stat">
+          <strong>2</strong>
+          <span>已整理题目</span>
+        </div>
+        <div class="stat">
+          <strong>8</strong>
+          <span>覆盖考察点</span>
+        </div>
+        <div class="stat">
+          <strong>1</strong>
+          <span>最高频次</span>
+        </div>
+        <div class="stat">
+          <strong>13</strong>
+          <span>练习测试用例</span>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="directory-title">
+      <h2 id="directory-title">考察点目录</h2>
+      <table class="directory">
+        <thead>
+          <tr>
+            <th>排序</th>
+            <th>考察点</th>
+            <th>题目频率</th>
+            <th>题目索引</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td><a href="#topic-string">字符串</a></td>
+            <td>1</td>
+            <td><a href="longest_substring_without_repeating_characters_003/index.html">003 无重复字符的最长子串</a></td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td><a href="#topic-sliding-window">滑动窗口</a></td>
+            <td>1</td>
+            <td><a href="longest_substring_without_repeating_characters_003/index.html">003 无重复字符的最长子串</a></td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td><a href="#topic-two-pointers">双指针</a></td>
+            <td>1</td>
+            <td><a href="longest_substring_without_repeating_characters_003/index.html">003 无重复字符的最长子串</a></td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td><a href="#topic-hashset">HashSet 判重</a></td>
+            <td>1</td>
+            <td><a href="longest_substring_without_repeating_characters_003/index.html">003 无重复字符的最长子串</a></td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td><a href="#topic-hashmap">HashMap 定位</a></td>
+            <td>1</td>
+            <td><a href="lru_cache_146/index.html">146 LRU 缓存</a></td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td><a href="#topic-linked-list">双向链表</a></td>
+            <td>1</td>
+            <td><a href="lru_cache_146/index.html">146 LRU 缓存</a></td>
+          </tr>
+          <tr>
+            <td>7</td>
+            <td><a href="#topic-cache">缓存淘汰策略</a></td>
+            <td>1</td>
+            <td><a href="lru_cache_146/index.html">146 LRU 缓存</a></td>
+          </tr>
+          <tr>
+            <td>8</td>
+            <td><a href="#topic-design">数据结构设计</a></td>
+            <td>1</td>
+            <td><a href="lru_cache_146/index.html">146 LRU 缓存</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section aria-labelledby="topics-title">
+      <h2 id="topics-title">考察点</h2>
+
+      <article class="topic-section" id="topic-string">
+        <h3>字符串</h3>
+        <div class="topic-meta">题目频率：1</div>
+        <div class="method">处理字符串题时先区分子串、子序列和字符集合；子串必须连续，通常适合用窗口、前缀或区间状态维护。</div>
+        <table class="problem-table">
+          <thead>
+            <tr>
+              <th>题目</th>
+              <th>关联考察点</th>
+              <th>练习文件</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><a href="longest_substring_without_repeating_characters_003/index.html">003 无重复字符的最长子串</a></td>
+              <td><span class="tag">滑动窗口</span> <span class="tag">双指针</span> <span class="tag">HashSet</span></td>
+              <td><a href="longest_substring_without_repeating_characters_003/Solution.java">Solution.java</a> · <a href="longest_substring_without_repeating_characters_003/SolutionTest.java">SolutionTest.java</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </article>
+
+      <article class="topic-section" id="topic-sliding-window">
+        <h3>滑动窗口</h3>
+        <div class="topic-meta">题目频率：1</div>
+        <div class="method">窗口题的核心规律是维护一个连续区间：右指针负责扩张，窗口不合法时左指针收缩，答案通常在窗口合法或扩张成功后更新。</div>
+        <table class="problem-table">
+          <thead>
+            <tr>
+              <th>题目</th>
+              <th>关联考察点</th>
+              <th>练习文件</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><a href="longest_substring_without_repeating_characters_003/index.html">003 无重复字符的最长子串</a></td>
+              <td><span class="tag">字符串</span> <span class="tag">双指针</span> <span class="tag">HashSet</span></td>
+              <td><a href="longest_substring_without_repeating_characters_003/Solution.java">Solution.java</a> · <a href="longest_substring_without_repeating_characters_003/SolutionTest.java">SolutionTest.java</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </article>
+
+      <article class="topic-section" id="topic-two-pointers">
+        <h3>双指针</h3>
+        <div class="topic-meta">题目频率：1</div>
+        <div class="method">双指针常用于减少重复扫描。先明确两个指针的语义，是左右边界、快慢指针还是读写指针，再保证移动方向和终止条件单调清晰。</div>
+        <table class="problem-table">
+          <thead>
+            <tr>
+              <th>题目</th>
+              <th>关联考察点</th>
+              <th>练习文件</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><a href="longest_substring_without_repeating_characters_003/index.html">003 无重复字符的最长子串</a></td>
+              <td><span class="tag">字符串</span> <span class="tag">滑动窗口</span> <span class="tag">HashSet</span></td>
+              <td><a href="longest_substring_without_repeating_characters_003/Solution.java">Solution.java</a> · <a href="longest_substring_without_repeating_characters_003/SolutionTest.java">SolutionTest.java</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </article>
+
+      <article class="topic-section" id="topic-hashset">
+        <h3>HashSet 判重</h3>
+        <div class="topic-meta">题目频率：1</div>
+        <div class="method">当题目只关心元素是否存在、不关心对应值时优先考虑集合。窗口类题目中，元素进入窗口时加入集合，离开窗口时必须同步删除。</div>
+        <table class="problem-table">
+          <thead>
+            <tr>
+              <th>题目</th>
+              <th>关联考察点</th>
+              <th>练习文件</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><a href="longest_substring_without_repeating_characters_003/index.html">003 无重复字符的最长子串</a></td>
+              <td><span class="tag">字符串</span> <span class="tag">滑动窗口</span> <span class="tag">双指针</span></td>
+              <td><a href="longest_substring_without_repeating_characters_003/Solution.java">Solution.java</a> · <a href="longest_substring_without_repeating_characters_003/SolutionTest.java">SolutionTest.java</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </article>
+
+      <article class="topic-section" id="topic-hashmap">
+        <h3>HashMap 定位</h3>
+        <div class="topic-meta">题目频率：1</div>
+        <div class="method">当题目需要通过 key 直接找到状态、节点或下标时使用哈希表。设计类题目中，哈希表通常负责 O(1) 查询入口，真正顺序由另一个结构维护。</div>
+        <table class="problem-table">
+          <thead>
+            <tr>
+              <th>题目</th>
+              <th>关联考察点</th>
+              <th>练习文件</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><a href="lru_cache_146/index.html">146 LRU 缓存</a></td>
+              <td><span class="tag">双向链表</span> <span class="tag">缓存淘汰策略</span> <span class="tag">数据结构设计</span></td>
+              <td><a href="lru_cache_146/LRUCache.java">LRUCache.java</a> · <a href="lru_cache_146/LRUCacheTest.java">LRUCacheTest.java</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </article>
+
+      <article class="topic-section" id="topic-linked-list">
+        <h3>双向链表</h3>
+        <div class="topic-meta">题目频率：1</div>
+        <div class="method">需要 O(1) 删除任意节点并调整顺序时，双向链表比单链表更直接。常见做法是使用虚拟头尾节点，统一插入、删除和边界处理。</div>
+        <table class="problem-table">
+          <thead>
+            <tr>
+              <th>题目</th>
+              <th>关联考察点</th>
+              <th>练习文件</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><a href="lru_cache_146/index.html">146 LRU 缓存</a></td>
+              <td><span class="tag">HashMap</span> <span class="tag">缓存淘汰策略</span> <span class="tag">数据结构设计</span></td>
+              <td><a href="lru_cache_146/LRUCache.java">LRUCache.java</a> · <a href="lru_cache_146/LRUCacheTest.java">LRUCacheTest.java</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </article>
+
+      <article class="topic-section" id="topic-cache">
+        <h3>缓存淘汰策略</h3>
+        <div class="topic-meta">题目频率：1</div>
+        <div class="method">缓存题先明确容量、访问后顺序变化、更新已有 key、淘汰时机。LRU 的规律是最近访问的放到最前，容量超限时淘汰最久未使用项。</div>
+        <table class="problem-table">
+          <thead>
+            <tr>
+              <th>题目</th>
+              <th>关联考察点</th>
+              <th>练习文件</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><a href="lru_cache_146/index.html">146 LRU 缓存</a></td>
+              <td><span class="tag">HashMap</span> <span class="tag">双向链表</span> <span class="tag">数据结构设计</span></td>
+              <td><a href="lru_cache_146/LRUCache.java">LRUCache.java</a> · <a href="lru_cache_146/LRUCacheTest.java">LRUCacheTest.java</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </article>
+
+      <article class="topic-section" id="topic-design">
+        <h3>数据结构设计</h3>
+        <div class="topic-meta">题目频率：1</div>
+        <div class="method">设计题重点是让每个 API 的复杂度稳定，并维护多个结构之间的一致性。先定义状态，再逐个操作检查状态如何变化。</div>
+        <table class="problem-table">
+          <thead>
+            <tr>
+              <th>题目</th>
+              <th>关联考察点</th>
+              <th>练习文件</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><a href="lru_cache_146/index.html">146 LRU 缓存</a></td>
+              <td><span class="tag">HashMap</span> <span class="tag">双向链表</span> <span class="tag">缓存淘汰策略</span></td>
+              <td><a href="lru_cache_146/LRUCache.java">LRUCache.java</a> · <a href="lru_cache_146/LRUCacheTest.java">LRUCacheTest.java</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </article>
+    </section>
+  </main>
+
+  <footer>
+    src/com/leetcode2026/leetcode-problem-bank.html
+  </footer>
+</body>
+</html>
