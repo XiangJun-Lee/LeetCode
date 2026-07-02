@@ -1,0 +1,4 @@
+interface:
+  display_name: "LeetCode Study Generator"
+  short_description: "Initialize LeetCode study workspaces"
+  default_prompt: "Use $leetcode-study-generator to initialize my LeetCode study workspace, infer my practice language, and turn this link into HTML, practice code, tests, and a leetcode-problem-bank update."
