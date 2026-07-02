@@ -1,6 +1,6 @@
 ---
 name: leetcode-study-generator
-description: Use when the user provides a LeetCode link or asks to initialize or update a LeetCode study workspace, study folder, interactive HTML explanation, practice code file, runnable tests, or a yearly problem-bank page.
+description: Use when the user provides a LeetCode link, asks for high-frequency LeetCode problems by knowledge point, or asks to initialize or update a LeetCode study workspace, study folder, interactive HTML explanation, practice code file, runnable tests, or yearly problem-bank page.
 ---
 
 # LeetCode Study Generator
@@ -20,6 +20,24 @@ Before editing generated files or this skill:
 2. Update all dependent rules together: directory naming, HTML structure, code files, tests, commands, verification, and problem-bank indexing.
 3. Remove or rewrite outdated wording that conflicts with the new rule.
 4. Keep examples, file names, and commands aligned with the current rule set.
+
+## Request Modes
+
+Support these request forms:
+
+1. **Single Problem Mode**: the user provides one LeetCode problem URL. Generate one problem folder.
+2. **Knowledge Point Mode**: the user invokes `/leetcode-study-generator knowledge-point <知识点> [num]` or `/skill-name knowledge-point <知识点> [num]`. Find high-frequency LeetCode problems for that knowledge point, prefer problems not already present in the study directory, then generate one problem folder for each selected new problem.
+3. **Review Reinitialization Mode**: when Knowledge Point Mode finds no uncompleted matching problems, ask the user whether to review completed problems from that knowledge point. If the user chooses problem(s), reset only the practice code/test portion for the chosen existing folder(s). Do not regenerate or overwrite the corresponding `index.html`.
+
+Knowledge Point Mode parsing rules:
+- Treat the final token as `num` only when it is a positive integer.
+- If `num` is omitted, use `1`.
+- Treat every token between `knowledge-point` and the optional final `num` as the knowledge point, so multi-word topics such as `binary search answer` still work.
+- If `num` is larger than the number of confidently verified matching problems, generate only the verified problems and report the shortfall.
+- A problem counts as already completed when its problem directory exists in the study directory or it is already indexed in `leetcode-problem-bank.html`.
+- Select high-frequency uncompleted problems first. Skip completed problems while uncompleted verified candidates remain.
+- If no uncompleted candidate remains, present up to five completed matching problems sorted by frequency, or all completed matching problems when fewer than five exist, and ask the user to choose which one(s) to review.
+- In Review Reinitialization Mode, preserve `index.html` and problem-bank content. Reinitialize the practice code file to a hint-free skeleton and ensure runnable tests exist; do not rewrite the learning HTML unless the user explicitly asks for a full refresh.
 
 ## Execution Order
 
@@ -55,7 +73,24 @@ Rules:
 - Create or update `leetcode-problem-bank.html` in the study directory.
 - Remember for the current task: project directory, study directory, common language, and source root if the language uses packages.
 
-### 3. Read And Verify The LeetCode Problem
+### 3. Resolve Requested Problems
+
+For Single Problem Mode:
+1. Extract the problem slug from the URL.
+2. Continue with that single problem.
+
+For Knowledge Point Mode:
+1. Browse current LeetCode and reliable curated sources to identify high-frequency problems for the requested knowledge point. Prefer LeetCode China topic/tag pages, official lists such as 热题 100 or 面试经典, and widely accepted curated lists when official frequency data is not exposed.
+2. Rank candidates by frequency signals: appearance across official/curated high-frequency lists, topic/tag match quality, interview-list presence, and community consensus.
+3. Prefer classic representative problems that directly exercise the requested knowledge point over loosely related problems.
+4. Verify each candidate's problem number, title, slug, URL, tags, examples, constraints, and official solution availability before generation.
+5. Compare verified candidates with existing study folders and `leetcode-problem-bank.html` entries.
+6. Select up to `num` high-frequency uncompleted verified problems, defaulting to `1` when omitted.
+7. If fewer than `num` uncompleted problems are available, generate the available uncompleted problems and report the shortfall.
+8. If zero uncompleted problems are available, present up to five completed verified candidates sorted by frequency, ask the user whether to review one or more of them, and wait for the user's choice before changing files.
+9. Keep a short source note for the selection and include relevant links in each generated `index.html`.
+
+### 4. Read And Verify Each LeetCode Problem
 
 1. Extract the problem slug from the URL.
 2. Browse or otherwise verify the problem number, title, examples, constraints, and tags when not already available locally.
@@ -65,7 +100,9 @@ Rules:
 
 The generated explanation, reference implementation, tests, and complexity must not be worse than the official answer in correctness, edge cases, or asymptotic complexity.
 
-### 4. Create The Problem Directory
+For batch generation, apply the remaining steps to every selected new problem. Update `leetcode-problem-bank.html` once after all selected new problems have been generated or updated. For Review Reinitialization Mode, skip HTML generation and problem-bank updates; only reset practice code/test files for the chosen existing problem(s).
+
+### 5. Create The Problem Directory
 
 Use this directory name:
 
@@ -81,9 +118,11 @@ longest_substring_without_repeating_characters_003
 
 For Java source/package trees, this directory name is a valid package segment; match the package statement to the directory path. Put all per-problem files in this directory. Do not leave standalone problem HTML files in the study directory root.
 
-### 5. Generate `index.html`
+### 6. Generate `index.html`
 
 Use the standardized HTML rules below for every problem, regardless of model.
+
+Skip this step in Review Reinitialization Mode unless the user explicitly requests a full HTML refresh.
 
 #### Required Structure
 
@@ -129,6 +168,7 @@ For Java reference code:
 
 Include:
 - Problem number, title, source link, and concise restatement.
+- In Knowledge Point Mode, explain why this problem was selected for the requested knowledge point.
 - Examples with output reasoning.
 - Knowledge points and algorithm pattern.
 - Official-solution comparison notes.
@@ -143,7 +183,7 @@ Include:
 
 When the algorithm has evolving state, include a small plain HTML/CSS/JS visualization such as next-step and reset controls.
 
-### 6. Generate Practice Code
+### 7. Generate Practice Code
 
 Use the initialized common language.
 
@@ -151,6 +191,7 @@ General rules:
 - Practice files must contain no hints, TODO comments, strategy notes, docstrings/Javadocs, or explanatory comments.
 - Prefer a minimal stub that compiles/runs and fails tests clearly.
 - Keep file names conventional for the selected language.
+- In Review Reinitialization Mode, overwrite only the practice code file(s) for the chosen existing problem(s), preserving `index.html`.
 
 Language conventions:
 - Java: `Solution.java` or fixed LeetCode class name such as `LRUCache.java`; legal package statement when under a source root; type-correct stub values.
@@ -159,7 +200,7 @@ Language conventions:
 - C++: `solution.cpp`; minimal standard headers; `class Solution` with public LeetCode method.
 - JavaScript: `solution.js`; LeetCode-style function/class; export with `module.exports` so tests can import it.
 
-### 7. Generate Runnable Tests
+### 8. Generate Runnable Tests
 
 Use no external test framework unless the project already has one and the user wants it.
 
@@ -174,7 +215,9 @@ Language-specific test files and commands:
 
 Include a short timeout guard when practical so loop bugs fail clearly instead of hanging.
 
-### 8. Record Commands In HTML
+In Review Reinitialization Mode, preserve existing runnable tests when they already match the current problem signature. Recreate tests only when missing, broken, or inconsistent with the current language conventions.
+
+### 9. Record Commands In HTML
 
 The `index.html` practice section must show the exact command for the selected language:
 - Java: run from source root, for example `javac com/leetcode2026/problem_name_000/Solution.java com/leetcode2026/problem_name_000/SolutionTest.java && java com.leetcode2026.problem_name_000.SolutionTest`.
@@ -183,7 +226,9 @@ The `index.html` practice section must show the exact command for the selected l
 - C++: `g++ -std=c++17 solution.cpp solution_test.cpp -o solution_test && ./solution_test`.
 - JavaScript: `node solution.test.js`.
 
-### 9. Update `leetcode-problem-bank.html`
+Skip this step in Review Reinitialization Mode because `index.html` must not be rewritten.
+
+### 10. Update `leetcode-problem-bank.html`
 
 The page title and H1 must be `LeetCode 题库`.
 
@@ -194,7 +239,9 @@ The page must contain exactly these major content parts:
 
 Do not show an `更新规则` section. Do not use side-by-side graph cards. Preserve existing entries, recompute frequencies from all indexed problems, and use stable existing order for ties.
 
-### 10. Verify And Clean Up
+Skip this step in Review Reinitialization Mode unless the chosen problem is missing from the problem bank and the user explicitly asks to repair indexing.
+
+### 11. Verify And Clean Up
 
 1. Run the language-appropriate compile/test command from the correct working directory.
 2. If the practice file is intentionally a skeleton, the test run should fail clearly on an expected case; report that as expected.
