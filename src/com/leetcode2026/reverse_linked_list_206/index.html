@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LeetCode 206 - 反转链表</title>
+  <style>
+    :root {
+      --bg: #f6f8fb;
+      --panel: #ffffff;
+      --ink: #172033;
+      --muted: #667085;
+      --line: #d8deea;
+      --blue: #2563eb;
+      --blue-soft: #dbeafe;
+      --green: #15803d;
+      --green-soft: #dcfce7;
+      --orange: #c2410c;
+      --orange-soft: #ffedd5;
+      --red: #b91c1c;
+      --red-soft: #fee2e2;
+      --code-bg: #0b1020;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--bg);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif;
+      line-height: 1.65;
+    }
+
+    header {
+      padding: 42px 20px 34px;
+      color: #fff;
+      background: linear-gradient(135deg, #1e40af 0%, #047857 100%);
+    }
+
+    .wrap {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    h1, h2, h3, p { margin-top: 0; }
+
+    h1 {
+      margin-bottom: 10px;
+      font-size: clamp(30px, 5vw, 46px);
+      line-height: 1.15;
+      letter-spacing: 0;
+    }
+
+    h2 {
+      margin-bottom: 16px;
+      font-size: 24px;
+    }
+
+    h3 {
+      margin-bottom: 8px;
+      font-size: 18px;
+    }
+
+    a {
+      color: var(--blue);
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    a:hover { text-decoration: underline; }
+
+    .subtitle {
+      max-width: 780px;
+      margin-bottom: 0;
+      color: rgba(255, 255, 255, 0.86);
+      font-size: 17px;
+    }
+
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 20px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      color: #063f3a;
+      background: #d9fffb;
+      font-size: 13px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    main { padding: 28px 0 56px; }
+
+    section {
+      margin-top: 18px;
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .three-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .note {
+      padding: 14px 16px;
+      border-left: 4px solid var(--blue);
+      border-radius: 6px;
+      background: var(--blue-soft);
+    }
+
+    .ok {
+      border-left-color: var(--green);
+      background: var(--green-soft);
+    }
+
+    .warn {
+      border-left-color: var(--orange);
+      background: var(--orange-soft);
+    }
+
+    .danger {
+      border-left-color: var(--red);
+      background: var(--red-soft);
+    }
+
+    .muted { color: var(--muted); }
+
+    code {
+      padding: 2px 5px;
+      border-radius: 5px;
+      color: #0f3f8f;
+      background: #eef4ff;
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      font-size: 0.94em;
+    }
+
+    pre {
+      overflow: auto;
+      margin: 14px 0 0;
+      padding: 18px;
+      border-radius: 8px;
+      color: #e5e7eb;
+      background: var(--code-bg);
+      line-height: 1.55;
+    }
+
+    pre code {
+      padding: 0;
+      color: inherit;
+      background: transparent;
+      font-size: 14px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+    }
+
+    th, td {
+      padding: 11px 12px;
+      border: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th { background: #eef3fb; }
+
+    ul, ol {
+      padding-left: 22px;
+      margin-top: 8px;
+      margin-bottom: 0;
+    }
+
+    li + li { margin-top: 6px; }
+
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .flow div {
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfcff;
+      text-align: center;
+      font-weight: 800;
+    }
+
+    .demo {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(290px, 0.85fr);
+      gap: 18px;
+      align-items: start;
+    }
+
+    .list-line {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+      min-height: 82px;
+      padding: 16px;
+      border: 1px dashed #9fb0ca;
+      border-radius: 8px;
+      background: #fbfcff;
+    }
+
+    .node {
+      position: relative;
+      min-width: 58px;
+      padding: 10px 12px;
+      border: 1px solid #93c5fd;
+      border-radius: 8px;
+      background: var(--blue-soft);
+      text-align: center;
+      font-weight: 900;
+    }
+
+    .node.prev { border-color: #86efac; background: var(--green-soft); }
+    .node.curr { outline: 3px solid #facc15; outline-offset: 2px; }
+    .node.next { border-color: #fdba74; background: var(--orange-soft); }
+
+    .pointer-label {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .arrow {
+      color: #64748b;
+      font-weight: 900;
+    }
+
+    .state-panel {
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfcff;
+    }
+
+    .state-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin: 14px 0;
+    }
+
+    .metric {
+      padding: 12px;
+      border: 1px solid #d8e0ec;
+      border-radius: 7px;
+      background: #fff;
+    }
+
+    .metric span {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .metric strong {
+      display: block;
+      margin-top: 4px;
+      font-size: 18px;
+    }
+
+    .step-text {
+      min-height: 88px;
+      margin-top: 12px;
+      padding: 12px;
+      border-radius: 7px;
+      background: #f0f4fa;
+    }
+
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    button {
+      min-height: 38px;
+      padding: 8px 14px;
+      border: 1px solid #b6c3d8;
+      border-radius: 7px;
+      color: #102033;
+      background: #fff;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    button.primary {
+      border-color: var(--blue);
+      color: #fff;
+      background: var(--blue);
+    }
+
+    button:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+
+    footer {
+      padding: 20px;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    @media (max-width: 860px) {
+      .grid, .three-grid, .flow, .demo { grid-template-columns: 1fr; }
+      section { padding: 18px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <h1>LeetCode 206：反转链表</h1>
+      <p class="subtitle">给定单链表头节点，把链表原地反转并返回新的头节点。核心是保存后继节点，再把当前节点的 next 指向前驱。</p>
+      <div class="badge-row">
+        <span class="badge">Java</span>
+        <span class="badge">链表</span>
+        <span class="badge">双指针</span>
+        <span class="badge">迭代</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section>
+      <h2>题目概述</h2>
+      <p>输入一个单链表的头节点 <code>head</code>，返回反转后的链表头节点。链表节点定义为 <code>ListNode</code>，每个节点只有 <code>val</code> 和 <code>next</code>。</p>
+      <div class="note">
+        反转不是交换节点值，而是改变每个节点的 <code>next</code> 指针方向。
+      </div>
+    </section>
+
+    <section>
+      <h2>示例拆解</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>输入链表</th>
+            <th>输出链表</th>
+            <th>解释</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>1 → 2 → 3 → 4 → 5</code></td>
+            <td><code>5 → 4 → 3 → 2 → 1</code></td>
+            <td>所有节点方向反过来，原尾节点 5 变成新头节点。</td>
+          </tr>
+          <tr>
+            <td><code>1 → 2</code></td>
+            <td><code>2 → 1</code></td>
+            <td>2 的 next 指向 1，1 的 next 指向 null。</td>
+          </tr>
+          <tr>
+            <td><code>[]</code></td>
+            <td><code>[]</code></td>
+            <td>空链表没有节点，直接返回 null。</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>考察点</h2>
+      <div class="three-grid">
+        <div class="note ok">
+          <h3>链表指针操作</h3>
+          <p>理解节点之间不是数组下标关系，而是由 <code>next</code> 串起来。</p>
+        </div>
+        <div class="note">
+          <h3>双指针迭代</h3>
+          <p><code>prev</code> 指向已反转部分头部，<code>curr</code> 指向当前待处理节点。</p>
+        </div>
+        <div class="note warn">
+          <h3>原地修改</h3>
+          <p>不需要新建整条链表，只改变每个节点的指向。</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>官方题解对比</h2>
+      <p>官方题解主要给出迭代和递归两种做法。这个页面以迭代法为主，因为它空间复杂度为 <code>O(1)</code>，更适合作为面试首选答案；递归写法更短，但调用栈会占用 <code>O(n)</code> 空间。</p>
+      <div class="grid">
+        <div class="note ok">
+          <h3>本页方案</h3>
+          <p>使用 <code>prev</code>、<code>curr</code>、<code>next</code> 三个引用，循环中逐个反转节点指向。</p>
+        </div>
+        <div class="note">
+          <h3>复杂度不弱于官方最优</h3>
+          <p>时间复杂度 <code>O(n)</code>，额外空间 <code>O(1)</code>，和官方迭代方案一致。</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>解题思路</h2>
+      <div class="flow">
+        <div>保存 curr.next</div>
+        <div>curr.next 指向 prev</div>
+        <div>prev 前进到 curr</div>
+        <div>curr 前进到 next</div>
+      </div>
+      <p style="margin-top: 16px;">循环过程中，<code>prev</code> 始终代表“已经反转好的链表头”，<code>curr</code> 代表“还没反转的第一个节点”。当 <code>curr</code> 走到 null，说明所有节点都处理完，<code>prev</code> 就是新的头节点。</p>
+    </section>
+
+    <section>
+      <h2>参考实现</h2>
+      <pre><code>class Solution {
+    public ListNode reverseList(ListNode head) {
+        // prev 指向已经反转完成的链表头；一开始还没有节点，所以是 null。
+        ListNode prev = null;
+
+        // curr 指向当前要处理的节点，从原链表头开始。
+        ListNode curr = head;
+
+        while (curr != null) {
+            // 先保存原来的后继节点，否则 curr.next 改掉后会丢失剩余链表。
+            ListNode next = curr.next;
+
+            // 反转当前节点指向：让 curr 接到已经反转好的链表前面。
+            curr.next = prev;
+
+            // prev 前进，新的已反转链表头变成 curr。
+            prev = curr;
+
+            // curr 前进，继续处理原链表剩余部分。
+            curr = next;
+        }
+
+        // curr 为 null 时，prev 指向新链表头。
+        return prev;
+    }
+}</code></pre>
+    </section>
+
+    <section>
+      <h2>核心变量/状态</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>变量</th>
+            <th>含义</th>
+            <th>关键不变量</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>prev</code></td>
+            <td>已反转部分的头节点</td>
+            <td>每处理完一个节点，prev 都会成为新的反转链表头</td>
+          </tr>
+          <tr>
+            <td><code>curr</code></td>
+            <td>当前待反转节点</td>
+            <td>只要 curr 不为空，循环就继续</td>
+          </tr>
+          <tr>
+            <td><code>next</code></td>
+            <td>curr 原本的后继节点</td>
+            <td>必须在改 curr.next 前保存，否则剩余链表会丢</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>执行过程可视化</h2>
+      <p class="muted">示例链表：<code>1 → 2 → 3 → null</code>。链表展示为当前指针关系，不是数组。</p>
+      <div class="demo">
+        <div>
+          <div class="list-line" id="listLine"></div>
+          <div class="controls">
+            <button id="prevBtn">上一步</button>
+            <button id="nextBtn" class="primary">下一步</button>
+            <button id="resetBtn">重置</button>
+          </div>
+        </div>
+        <aside class="state-panel">
+          <h3>指针状态</h3>
+          <div class="state-grid">
+            <div class="metric"><span>prev</span><strong id="prevValue">null</strong></div>
+            <div class="metric"><span>curr</span><strong id="currValue">1</strong></div>
+            <div class="metric"><span>next</span><strong id="nextValue">-</strong></div>
+          </div>
+          <div class="step-text" id="stepText"></div>
+        </aside>
+      </div>
+    </section>
+
+    <section>
+      <h2>易错点</h2>
+      <ol>
+        <li><strong>先改 curr.next，后保存 next：</strong>会丢失原链表剩余部分。</li>
+        <li><strong>返回 curr：</strong>循环结束时 curr 是 null，应该返回 prev。</li>
+        <li><strong>忘记处理空链表：</strong>迭代法天然支持空链表，head 为 null 时直接返回 null。</li>
+        <li><strong>只交换 val：</strong>题目要求反转链表结构，不是交换节点值。</li>
+        <li><strong>递归忘记断开 head.next：</strong>递归法里不处理好可能形成环。</li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>复杂度分析</h2>
+      <div class="grid">
+        <div class="note ok">
+          <h3>时间复杂度：O(n)</h3>
+          <p>每个节点只访问一次，循环处理 n 个节点。</p>
+        </div>
+        <div class="note">
+          <h3>空间复杂度：O(1)</h3>
+          <p>迭代法只使用固定数量的引用变量，不随链表长度增长。</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>练习文件</h2>
+      <div class="grid">
+        <div class="note">
+          <h3>Solution.java</h3>
+          <p>这是你的练习入口，文件中没有提示和注释。</p>
+        </div>
+        <div class="note ok">
+          <h3>SolutionTest.java</h3>
+          <p>从项目 <code>src</code> 目录运行：</p>
+          <p><code>javac com/leetcode2026/reverse_linked_list_206/Solution.java com/leetcode2026/reverse_linked_list_206/SolutionTest.java &amp;&amp; java com.leetcode2026.reverse_linked_list_206.SolutionTest</code></p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>来源链接</h2>
+      <ul>
+        <li><a href="https://leetcode.cn/problems/reverse-linked-list/">LeetCode 206 题目页</a></li>
+        <li><a href="https://leetcode.cn/problems/reverse-linked-list/solutions/">LeetCode 206 题解页</a></li>
+        <li><a href="../leetcode-problem-bank.html">返回 LeetCode 题库</a></li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <a href="../leetcode-problem-bank.html">返回 LeetCode 题库</a>
+  </footer>
+
+  <script>
+    const states = [
+      {
+        edges: [[1, 2], [2, 3], [3, null]],
+        prev: "null",
+        curr: "1",
+        next: "-",
+        text: "初始状态：prev 为空，curr 指向原链表头 1。"
+      },
+      {
+        edges: [[1, 2], [2, 3], [3, null]],
+        prev: "null",
+        curr: "1",
+        next: "2",
+        text: "保存 next = curr.next，也就是节点 2。"
+      },
+      {
+        edges: [[1, null], [2, 3], [3, null]],
+        prev: "null",
+        curr: "1",
+        next: "2",
+        text: "执行 curr.next = prev，节点 1 的 next 指向 null。"
+      },
+      {
+        edges: [[1, null], [2, 3], [3, null]],
+        prev: "1",
+        curr: "2",
+        next: "-",
+        text: "prev 前进到 1，curr 前进到之前保存的 2。"
+      },
+      {
+        edges: [[1, null], [2, 3], [3, null]],
+        prev: "1",
+        curr: "2",
+        next: "3",
+        text: "保存 next = 3，准备反转节点 2。"
+      },
+      {
+        edges: [[2, 1], [1, null], [3, null]],
+        prev: "1",
+        curr: "2",
+        next: "3",
+        text: "节点 2 指向 prev，也就是 1，已反转部分变成 2 → 1。"
+      },
+      {
+        edges: [[2, 1], [1, null], [3, null]],
+        prev: "2",
+        curr: "3",
+        next: "-",
+        text: "prev 前进到 2，curr 前进到 3。"
+      },
+      {
+        edges: [[2, 1], [1, null], [3, null]],
+        prev: "2",
+        curr: "3",
+        next: "null",
+        text: "保存 next = null，节点 3 是原链表最后一个节点。"
+      },
+      {
+        edges: [[3, 2], [2, 1], [1, null]],
+        prev: "2",
+        curr: "3",
+        next: "null",
+        text: "节点 3 指向 prev，已反转部分变成 3 → 2 → 1。"
+      },
+      {
+        edges: [[3, 2], [2, 1], [1, null]],
+        prev: "3",
+        curr: "null",
+        next: "-",
+        text: "curr 变成 null，循环结束，返回 prev，也就是节点 3。"
+      }
+    ];
+
+    const listLine = document.getElementById("listLine");
+    const prevValue = document.getElementById("prevValue");
+    const currValue = document.getElementById("currValue");
+    const nextValue = document.getElementById("nextValue");
+    const stepText = document.getElementById("stepText");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    const resetBtn = document.getElementById("resetBtn");
+    let index = 0;
+
+    function render() {
+      const state = states[index];
+      listLine.innerHTML = "";
+
+      state.edges.forEach((edge, i) => {
+        const value = String(edge[0]);
+        const node = document.createElement("div");
+        node.className = "node";
+        if (state.prev === value) node.classList.add("prev");
+        if (state.curr === value) node.classList.add("curr");
+        if (state.next === value) node.classList.add("next");
+        const labels = [];
+        if (state.prev === value) labels.push("prev");
+        if (state.curr === value) labels.push("curr");
+        if (state.next === value) labels.push("next");
+        node.innerHTML = `${value}${labels.length ? `<span class="pointer-label">${labels.join(" / ")}</span>` : ""}`;
+        listLine.appendChild(node);
+
+        const arrow = document.createElement("span");
+        arrow.className = "arrow";
+        arrow.textContent = edge[1] === null ? "→ null" : `→ ${edge[1]}`;
+        listLine.appendChild(arrow);
+
+        if (i < state.edges.length - 1) {
+          const spacer = document.createElement("span");
+          spacer.style.width = "8px";
+          listLine.appendChild(spacer);
+        }
+      });
+
+      prevValue.textContent = state.prev;
+      currValue.textContent = state.curr;
+      nextValue.textContent = state.next;
+      stepText.textContent = `第 ${index} 步：${state.text}`;
+      prevBtn.disabled = index === 0;
+      nextBtn.disabled = index === states.length - 1;
+    }
+
+    prevBtn.addEventListener("click", () => {
+      if (index > 0) {
+        index--;
+        render();
+      }
+    });
+
+    nextBtn.addEventListener("click", () => {
+      if (index < states.length - 1) {
+        index++;
+        render();
+      }
+    });
+
+    resetBtn.addEventListener("click", () => {
+      index = 0;
+      render();
+    });
+
+    render();
+  </script>
+</body>
+</html>
