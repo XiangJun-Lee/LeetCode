@@ -1,4 +1,4 @@
 interface:
   display_name: "LeetCode Study Generator"
-  short_description: "Generate LeetCode study folders by link or knowledge point"
-  default_prompt: "Use $leetcode-study-generator to initialize my LeetCode study workspace, infer my practice language, and generate study HTML, practice code, tests, and a leetcode-problem-bank update from a LeetCode link or from `/leetcode-study-generator knowledge-point <知识点> [num]`."
+  short_description: "Initialize LeetCode study workspaces and generate practice folders"
+  default_prompt: "Use $leetcode-study-generator with one command: `/leetcode-study-generator init`, `/leetcode-study-generator <leetcode-url>`, or `/leetcode-study-generator knowledge-point <知识点> [num]`."
