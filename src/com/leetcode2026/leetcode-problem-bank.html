@@ -188,7 +188,7 @@
       <h2>进度</h2>
       <div class="stats">
         <div class="stat">
-          <strong>4</strong>
+          <strong>5</strong>
           <span>已整理题目</span>
         </div>
         <div class="stat">
@@ -196,11 +196,11 @@
           <span>覆盖考察点</span>
         </div>
         <div class="stat">
-          <strong>2</strong>
+          <strong>3</strong>
           <span>最高频考察点题数</span>
         </div>
         <div class="stat">
-          <strong>26</strong>
+          <strong>34</strong>
           <span>可运行测试用例</span>
         </div>
       </div>
@@ -219,8 +219,18 @@
         <tbody>
           <tr>
             <td><a href="#topic-two-pointers">双指针</a></td>
+            <td>3</td>
+            <td><a href="longest_substring_without_repeating_characters_003/index.html">003 无重复字符的最长子串</a> · <a href="reverse_linked_list_206/index.html">206 反转链表</a> · <a href="three_sum_015/index.html">015 三数之和</a></td>
+          </tr>
+          <tr>
+            <td><a href="#topic-array">数组</a></td>
             <td>2</td>
-            <td><a href="longest_substring_without_repeating_characters_003/index.html">003 无重复字符的最长子串</a> · <a href="reverse_linked_list_206/index.html">206 反转链表</a></td>
+            <td><a href="kth_largest_element_in_an_array_215/index.html">215 数组中的第K个最大元素</a> · <a href="three_sum_015/index.html">015 三数之和</a></td>
+          </tr>
+          <tr>
+            <td><a href="#topic-sorting">排序</a></td>
+            <td>2</td>
+            <td><a href="kth_largest_element_in_an_array_215/index.html">215 数组中的第K个最大元素</a> · <a href="three_sum_015/index.html">015 三数之和</a></td>
           </tr>
           <tr>
             <td><a href="#topic-string">字符串</a></td>
@@ -273,11 +283,6 @@
             <td><a href="reverse_linked_list_206/index.html">206 反转链表</a></td>
           </tr>
           <tr>
-            <td><a href="#topic-array">数组</a></td>
-            <td>1</td>
-            <td><a href="kth_largest_element_in_an_array_215/index.html">215 数组中的第K个最大元素</a></td>
-          </tr>
-          <tr>
             <td><a href="#topic-quickselect">快速选择</a></td>
             <td>1</td>
             <td><a href="kth_largest_element_in_an_array_215/index.html">215 数组中的第K个最大元素</a></td>
@@ -292,11 +297,6 @@
             <td>1</td>
             <td><a href="kth_largest_element_in_an_array_215/index.html">215 数组中的第K个最大元素</a></td>
           </tr>
-          <tr>
-            <td><a href="#topic-sorting">排序</a></td>
-            <td>1</td>
-            <td><a href="kth_largest_element_in_an_array_215/index.html">215 数组中的第K个最大元素</a></td>
-          </tr>
         </tbody>
       </table>
     </section>
@@ -305,7 +305,7 @@
       <h2>考察点</h2>
       <h3>双指针</h3>
       <div class="topic-intro">
-        <p>规则模式：用两个引用维护边界或状态转移。字符串题通常表现为左右边界，链表题通常表现为前驱和当前节点。</p>
+        <p>规则模式：用两个引用维护边界或状态转移。字符串题通常表现为左右边界，链表题通常表现为前驱和当前节点；有序数组题则根据当前和的大小单调移动两端。</p>
       </div>
       <table>
         <thead><tr><th>题目</th><th>练习文件</th><th>测试命令</th></tr></thead>
@@ -319,6 +319,57 @@
             <td><a href="reverse_linked_list_206/index.html">206 反转链表</a></td>
             <td><a href="reverse_linked_list_206/Solution.java">Solution.java</a> · <a href="reverse_linked_list_206/SolutionTest.java">SolutionTest.java</a></td>
             <td><code>cd src &amp;&amp; javac com/leetcode2026/reverse_linked_list_206/Solution.java com/leetcode2026/reverse_linked_list_206/SolutionTest.java &amp;&amp; java com.leetcode2026.reverse_linked_list_206.SolutionTest</code></td>
+          </tr>
+          <tr>
+            <td><a href="three_sum_015/index.html">015 三数之和</a></td>
+            <td><a href="three_sum_015/Solution.java">Solution.java</a> · <a href="three_sum_015/SolutionTest.java">SolutionTest.java</a></td>
+            <td><code>cd src &amp;&amp; javac com/leetcode2026/three_sum_015/Solution.java com/leetcode2026/three_sum_015/SolutionTest.java &amp;&amp; java com.leetcode2026.three_sum_015.SolutionTest</code></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="topic-array">
+      <h2>考察点</h2>
+      <h3>数组</h3>
+      <div class="topic-intro">
+        <p>规则模式：在连续存储结构上按下标定位目标，常见操作包括原地交换、排序、区间扫描和边界收缩。</p>
+      </div>
+      <table>
+        <thead><tr><th>题目</th><th>练习文件</th><th>测试命令</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><a href="kth_largest_element_in_an_array_215/index.html">215 数组中的第K个最大元素</a></td>
+            <td><a href="kth_largest_element_in_an_array_215/Solution.java">Solution.java</a> · <a href="kth_largest_element_in_an_array_215/SolutionTest.java">SolutionTest.java</a></td>
+            <td><code>cd src &amp;&amp; javac com/leetcode2026/kth_largest_element_in_an_array_215/Solution.java com/leetcode2026/kth_largest_element_in_an_array_215/SolutionTest.java &amp;&amp; java com.leetcode2026.kth_largest_element_in_an_array_215.SolutionTest</code></td>
+          </tr>
+          <tr>
+            <td><a href="three_sum_015/index.html">015 三数之和</a></td>
+            <td><a href="three_sum_015/Solution.java">Solution.java</a> · <a href="three_sum_015/SolutionTest.java">SolutionTest.java</a></td>
+            <td><code>cd src &amp;&amp; javac com/leetcode2026/three_sum_015/Solution.java com/leetcode2026/three_sum_015/SolutionTest.java &amp;&amp; java com.leetcode2026.three_sum_015.SolutionTest</code></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="topic-sorting">
+      <h2>考察点</h2>
+      <h3>排序</h3>
+      <div class="topic-intro">
+        <p>规则模式：排序可以建立单调性、让重复元素相邻，并把无序查找转成可预测的扫描或选择过程。</p>
+      </div>
+      <table>
+        <thead><tr><th>题目</th><th>练习文件</th><th>测试命令</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><a href="kth_largest_element_in_an_array_215/index.html">215 数组中的第K个最大元素</a></td>
+            <td><a href="kth_largest_element_in_an_array_215/Solution.java">Solution.java</a> · <a href="kth_largest_element_in_an_array_215/SolutionTest.java">SolutionTest.java</a></td>
+            <td><code>cd src &amp;&amp; javac com/leetcode2026/kth_largest_element_in_an_array_215/Solution.java com/leetcode2026/kth_largest_element_in_an_array_215/SolutionTest.java &amp;&amp; java com.leetcode2026.kth_largest_element_in_an_array_215.SolutionTest</code></td>
+          </tr>
+          <tr>
+            <td><a href="three_sum_015/index.html">015 三数之和</a></td>
+            <td><a href="three_sum_015/Solution.java">Solution.java</a> · <a href="three_sum_015/SolutionTest.java">SolutionTest.java</a></td>
+            <td><code>cd src &amp;&amp; javac com/leetcode2026/three_sum_015/Solution.java com/leetcode2026/three_sum_015/SolutionTest.java &amp;&amp; java com.leetcode2026.three_sum_015.SolutionTest</code></td>
           </tr>
         </tbody>
       </table>
@@ -504,24 +555,6 @@
       </table>
     </section>
 
-    <section id="topic-array">
-      <h2>考察点</h2>
-      <h3>数组</h3>
-      <div class="topic-intro">
-        <p>规则模式：在连续存储结构上原地交换、按下标定位目标，重点关注边界和下标含义。</p>
-      </div>
-      <table>
-        <thead><tr><th>题目</th><th>练习文件</th><th>测试命令</th></tr></thead>
-        <tbody>
-          <tr>
-            <td><a href="kth_largest_element_in_an_array_215/index.html">215 数组中的第K个最大元素</a></td>
-            <td><a href="kth_largest_element_in_an_array_215/Solution.java">Solution.java</a> · <a href="kth_largest_element_in_an_array_215/SolutionTest.java">SolutionTest.java</a></td>
-            <td><code>cd src &amp;&amp; javac com/leetcode2026/kth_largest_element_in_an_array_215/Solution.java com/leetcode2026/kth_largest_element_in_an_array_215/SolutionTest.java &amp;&amp; java com.leetcode2026.kth_largest_element_in_an_array_215.SolutionTest</code></td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
-
     <section id="topic-quickselect">
       <h2>考察点</h2>
       <h3>快速选择</h3>
@@ -563,24 +596,6 @@
       <h3>堆</h3>
       <div class="topic-intro">
         <p>规则模式：维护固定容量的小顶堆或大顶堆，让堆顶代表当前候选答案。</p>
-      </div>
-      <table>
-        <thead><tr><th>题目</th><th>练习文件</th><th>测试命令</th></tr></thead>
-        <tbody>
-          <tr>
-            <td><a href="kth_largest_element_in_an_array_215/index.html">215 数组中的第K个最大元素</a></td>
-            <td><a href="kth_largest_element_in_an_array_215/Solution.java">Solution.java</a> · <a href="kth_largest_element_in_an_array_215/SolutionTest.java">SolutionTest.java</a></td>
-            <td><code>cd src &amp;&amp; javac com/leetcode2026/kth_largest_element_in_an_array_215/Solution.java com/leetcode2026/kth_largest_element_in_an_array_215/SolutionTest.java &amp;&amp; java com.leetcode2026.kth_largest_element_in_an_array_215.SolutionTest</code></td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
-
-    <section id="topic-sorting">
-      <h2>考察点</h2>
-      <h3>排序</h3>
-      <div class="topic-intro">
-        <p>规则模式：当题目要求顺序统计量时，完整排序是直接基线，但常可被选择算法优化。</p>
       </div>
       <table>
         <thead><tr><th>题目</th><th>练习文件</th><th>测试命令</th></tr></thead>

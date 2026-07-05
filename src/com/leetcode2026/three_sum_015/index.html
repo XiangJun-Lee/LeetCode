@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LeetCode 15 - 三数之和</title>
+  <style>
+    :root {
+      --bg: #f6f8fb;
+      --panel: #ffffff;
+      --ink: #172033;
+      --muted: #667085;
+      --line: #d8deea;
+      --blue: #2563eb;
+      --blue-soft: #dbeafe;
+      --green: #15803d;
+      --green-soft: #dcfce7;
+      --orange: #c2410c;
+      --orange-soft: #ffedd5;
+      --red: #b91c1c;
+      --red-soft: #fee2e2;
+      --code-bg: #0b1020;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--bg);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif;
+      line-height: 1.65;
+    }
+
+    header {
+      padding: 42px 20px 34px;
+      color: #fff;
+      background: linear-gradient(135deg, #1e40af 0%, #047857 100%);
+    }
+
+    .wrap {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    h1, h2, h3, p { margin-top: 0; }
+
+    h1 {
+      margin-bottom: 10px;
+      font-size: clamp(30px, 5vw, 46px);
+      line-height: 1.15;
+      letter-spacing: 0;
+    }
+
+    h2 {
+      margin-bottom: 16px;
+      font-size: 24px;
+    }
+
+    h3 {
+      margin-bottom: 8px;
+      font-size: 18px;
+    }
+
+    a {
+      color: var(--blue);
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    a:hover { text-decoration: underline; }
+
+    .subtitle {
+      max-width: 780px;
+      margin-bottom: 0;
+      color: rgba(255, 255, 255, 0.86);
+      font-size: 17px;
+    }
+
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 20px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      color: #063f3a;
+      background: #d9fffb;
+      font-size: 13px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    main { padding: 28px 0 56px; }
+
+    section {
+      margin-top: 18px;
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .three-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .note {
+      padding: 14px 16px;
+      border-left: 4px solid var(--blue);
+      border-radius: 6px;
+      background: var(--blue-soft);
+    }
+
+    .ok {
+      border-left-color: var(--green);
+      background: var(--green-soft);
+    }
+
+    .warn {
+      border-left-color: var(--orange);
+      background: var(--orange-soft);
+    }
+
+    .danger {
+      border-left-color: var(--red);
+      background: var(--red-soft);
+    }
+
+    .muted { color: var(--muted); }
+
+    code {
+      padding: 2px 5px;
+      border-radius: 5px;
+      color: #0f3f8f;
+      background: #eef4ff;
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      font-size: 0.94em;
+    }
+
+    pre {
+      overflow: auto;
+      margin: 14px 0 0;
+      padding: 18px;
+      border-radius: 8px;
+      color: #e5e7eb;
+      background: var(--code-bg);
+      line-height: 1.55;
+    }
+
+    pre code {
+      padding: 0;
+      color: inherit;
+      background: transparent;
+      font-size: 14px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+    }
+
+    th, td {
+      padding: 11px 12px;
+      border: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th { background: #eef3fb; }
+
+    ul, ol {
+      padding-left: 22px;
+      margin-top: 8px;
+      margin-bottom: 0;
+    }
+
+    li + li { margin-top: 6px; }
+
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .flow div {
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfcff;
+      text-align: center;
+      font-weight: 800;
+    }
+
+    .demo {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.9fr);
+      gap: 18px;
+      align-items: start;
+    }
+
+    .array-line {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 12px 0;
+    }
+
+    .num {
+      min-width: 44px;
+      padding: 8px 10px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfcff;
+      text-align: center;
+      font-weight: 800;
+    }
+
+    .num.fixed { border-color: var(--orange); background: var(--orange-soft); }
+    .num.left, .num.right { border-color: var(--blue); background: var(--blue-soft); }
+    .num.hit { border-color: var(--green); background: var(--green-soft); }
+
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    button {
+      min-height: 36px;
+      padding: 7px 13px;
+      border: 1px solid var(--blue);
+      border-radius: 8px;
+      color: #fff;
+      background: var(--blue);
+      font: inherit;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    button.secondary {
+      color: var(--blue);
+      background: #fff;
+    }
+
+    @media (max-width: 820px) {
+      .grid, .three-grid, .demo, .flow { grid-template-columns: 1fr; }
+      section { padding: 18px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <h1>LeetCode 15：三数之和</h1>
+      <p class="subtitle">排序后固定第一个数，把剩余问题变成有序数组上的双指针查找，并在三个层面跳过重复值。</p>
+      <div class="badge-row">
+        <span class="badge">中等</span>
+        <span class="badge">数组</span>
+        <span class="badge">双指针</span>
+        <span class="badge">排序</span>
+        <span class="badge">时间 O(n^2)</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section>
+      <h2>题目概述</h2>
+      <p>给定整数数组 <code>nums</code>，返回所有不重复的三元组 <code>[nums[i], nums[j], nums[k]]</code>，要求三个下标互不相同，并且三个数之和等于 <code>0</code>。答案中的三元组不能重复，输出顺序不重要。</p>
+      <div class="three-grid">
+        <div class="note"><strong>题号：</strong>15</div>
+        <div class="note"><strong>标题：</strong>三数之和</div>
+        <div class="note"><strong>约束：</strong><code>3 &lt;= nums.length &lt;= 3000</code></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>示例拆解</h2>
+      <div class="grid">
+        <div>
+          <h3>示例 1</h3>
+          <p><code>nums = [-1,0,1,2,-1,-4]</code></p>
+          <p>排序后是 <code>[-4,-1,-1,0,1,2]</code>。固定 <code>-1</code> 时，左右指针可以找到 <code>[-1,-1,2]</code> 和 <code>[-1,0,1]</code>。</p>
+        </div>
+        <div>
+          <h3>示例 2 与 3</h3>
+          <p><code>[0,1,1]</code> 没有任意三数和为 0，返回空列表。<code>[0,0,0]</code> 只有一个不重复三元组 <code>[0,0,0]</code>。</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>考察点</h2>
+      <ul>
+        <li><strong>排序：</strong>让相同元素相邻，也让双指针移动方向有单调依据。</li>
+        <li><strong>双指针：</strong>固定 <code>i</code> 后，用 <code>left</code> 和 <code>right</code> 在剩余区间里找两数和。</li>
+        <li><strong>去重：</strong>固定值、左指针值、右指针值都要跳过重复，否则会产生重复三元组。</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>官方题解对比</h2>
+      <div class="note ok">
+        <p>官方题解的核心路线是先排序，再枚举第一个数，最后在右侧区间用双指针寻找互补的两个数。这里采用相同的最优主思路，时间复杂度保持 <code>O(n^2)</code>，额外空间除答案外为 <code>O(log n)</code> 到 <code>O(n)</code>，取决于排序实现。</p>
+      </div>
+      <p>暴力三重循环是 <code>O(n^3)</code>，在 <code>n = 3000</code> 时不可接受。排序以后，第二、第三个数不需要重新嵌套枚举：和太小就移动左指针增大和，和太大就移动右指针减小和。</p>
+    </section>
+
+    <section>
+      <h2>解题思路</h2>
+      <div class="flow">
+        <div>排序</div>
+        <div>枚举 i</div>
+        <div>跳过重复 i</div>
+        <div>双指针收缩</div>
+        <div>命中后去重</div>
+      </div>
+      <ol>
+        <li>先对 <code>nums</code> 升序排序。</li>
+        <li>枚举 <code>i</code> 作为三元组的第一个位置。如果 <code>nums[i] &gt; 0</code>，后面都不可能凑成 0，可以提前结束。</li>
+        <li>若 <code>i &gt; 0</code> 且 <code>nums[i] == nums[i - 1]</code>，跳过，避免固定相同的第一个数。</li>
+        <li>设置 <code>left = i + 1</code>、<code>right = nums.length - 1</code>。若三数和小于 0，左指针右移；若大于 0，右指针左移。</li>
+        <li>命中 0 后收集结果，并跳过左右两侧相同的值，再继续向内收缩。</li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>参考实现</h2>
+      <pre><code class="language-java">package com.leetcode2026.three_sum_015;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+public class Solution {
+    public List&lt;List&lt;Integer&gt;&gt; threeSum(int[] nums) {
+        List&lt;List&lt;Integer&gt;&gt; answer = new ArrayList&lt;&gt;();
+        Arrays.sort(nums);
+
+        for (int i = 0; i &lt; nums.length - 2; i++) {
+            // 排序后，如果第一个数已经大于 0，后面只会更大，不可能得到和为 0 的三元组。
+            if (nums[i] &gt; 0) {
+                break;
+            }
+
+            // 固定相同的第一个数会得到重复答案，必须从源头跳过。
+            if (i &gt; 0 &amp;&amp; nums[i] == nums[i - 1]) {
+                continue;
+            }
+
+            int left = i + 1;
+            int right = nums.length - 1;
+
+            while (left &lt; right) {
+                int sum = nums[i] + nums[left] + nums[right];
+
+                if (sum == 0) {
+                    answer.add(Arrays.asList(nums[i], nums[left], nums[right]));
+
+                    // 命中后，左右指针都要跳过相同值，避免同一个三元组重复出现。
+                    int leftValue = nums[left];
+                    int rightValue = nums[right];
+                    while (left &lt; right &amp;&amp; nums[left] == leftValue) {
+                        left++;
+                    }
+                    while (left &lt; right &amp;&amp; nums[right] == rightValue) {
+                        right--;
+                    }
+                } else if (sum &lt; 0) {
+                    // 和偏小，需要更大的数，所以移动左指针。
+                    left++;
+                } else {
+                    // 和偏大，需要更小的数，所以移动右指针。
+                    right--;
+                }
+            }
+        }
+
+        return answer;
+    }
+}</code></pre>
+    </section>
+
+    <section>
+      <h2>核心变量/状态</h2>
+      <table>
+        <thead>
+          <tr><th>变量</th><th>含义</th><th>更新时机</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>i</code></td><td>固定的第一个数位置</td><td>外层循环推进，遇到重复值直接跳过</td></tr>
+          <tr><td><code>left</code></td><td>第二个数候选位置</td><td>当前和小于 0 或命中后去重时右移</td></tr>
+          <tr><td><code>right</code></td><td>第三个数候选位置</td><td>当前和大于 0 或命中后去重时左移</td></tr>
+          <tr><td><code>answer</code></td><td>已经找到的不重复三元组</td><td>仅在三数和等于 0 时追加</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>执行过程可视化</h2>
+      <div class="demo">
+        <div>
+          <p class="muted">示例数组排序后：<code>[-4,-1,-1,0,1,2]</code>。点击下一步观察固定值和左右指针如何移动。</p>
+          <div id="arrayLine" class="array-line"></div>
+          <div class="controls">
+            <button id="nextBtn" type="button">下一步</button>
+            <button id="resetBtn" class="secondary" type="button">重置</button>
+          </div>
+        </div>
+        <div class="note" id="stepText"></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>易错点</h2>
+      <ul>
+        <li>只对答案做集合去重，而不是在指针移动时去重，会让逻辑更复杂，也容易漏掉顺序归一化。</li>
+        <li>命中一个三元组后只移动一侧指针，会在重复值密集时产生重复答案或停留过久。</li>
+        <li>忘记跳过重复的 <code>i</code>，例如两个 <code>-1</code> 会各自生成 <code>[-1,0,1]</code>。</li>
+        <li>使用 <code>left &lt;= right</code> 会允许同一个元素被使用两次，必须保持 <code>left &lt; right</code>。</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>复杂度分析</h2>
+      <p>排序需要 <code>O(n log n)</code>。外层枚举 <code>i</code>，内层双指针每轮线性收缩，因此主复杂度是 <code>O(n^2)</code>。除返回答案外，额外空间主要来自排序过程，Java 的基本类型数组排序通常为 <code>O(log n)</code> 级递归栈；若按通用排序实现口径，也可写作 <code>O(log n)</code> 到 <code>O(n)</code>。</p>
+    </section>
+
+    <section>
+      <h2>练习文件</h2>
+      <p>练习代码是无提示骨架，测试文件包含官方示例、重复值、无解、无序输入和指针边界用例。</p>
+      <ul>
+        <li><a href="Solution.java">Solution.java</a></li>
+        <li><a href="SolutionTest.java">SolutionTest.java</a></li>
+        <li>运行命令：<code>cd src &amp;&amp; javac com/leetcode2026/three_sum_015/Solution.java com/leetcode2026/three_sum_015/SolutionTest.java &amp;&amp; java com.leetcode2026.three_sum_015.SolutionTest</code></li>
+        <li><a href="../leetcode-problem-bank.html">返回 LeetCode 题库</a></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>来源链接</h2>
+      <ul>
+        <li><a href="https://leetcode.cn/problems/3sum/">LeetCode China 题目页</a></li>
+        <li><a href="https://leetcode.cn/problems/3sum/solutions/284681/san-shu-zhi-he-by-leetcode-solution/">LeetCode 官方题解：三数之和</a></li>
+      </ul>
+    </section>
+  </main>
+
+  <script>
+    const steps = [
+      { i: 0, left: 1, right: 5, hit: [], text: "固定 -4，left 指向 -1，right 指向 2，三数和为 -3，偏小，left 右移。" },
+      { i: 0, left: 2, right: 5, hit: [], text: "仍固定 -4，left 指向第二个 -1，和仍偏小，left 继续右移。" },
+      { i: 0, left: 3, right: 5, hit: [], text: "固定 -4，0 + 2 仍不足以抵消 -4，left 继续右移，直到 left 与 right 相遇。" },
+      { i: 1, left: 2, right: 5, hit: [1, 2, 5], text: "固定 -1，left 指向 -1，right 指向 2，得到 [-1,-1,2]，命中后左右跳过重复值。" },
+      { i: 1, left: 3, right: 4, hit: [1, 3, 4], text: "继续固定 -1，left 指向 0，right 指向 1，得到 [-1,0,1]。" },
+      { i: 2, left: 3, right: 5, hit: [], text: "下一个 i 也是 -1，和前一个固定值重复，直接跳过，避免重复答案。" }
+    ];
+    const nums = [-4, -1, -1, 0, 1, 2];
+    let stepIndex = 0;
+    const arrayLine = document.getElementById("arrayLine");
+    const stepText = document.getElementById("stepText");
+
+    function renderStep() {
+      const step = steps[stepIndex];
+      arrayLine.innerHTML = nums.map((num, idx) => {
+        const classes = ["num"];
+        if (idx === step.i) classes.push("fixed");
+        if (idx === step.left) classes.push("left");
+        if (idx === step.right) classes.push("right");
+        if (step.hit.includes(idx)) classes.push("hit");
+        return `<span class="${classes.join(" ")}">${num}</span>`;
+      }).join("");
+      stepText.textContent = step.text;
+    }
+
+    document.getElementById("nextBtn").addEventListener("click", () => {
+      stepIndex = (stepIndex + 1) % steps.length;
+      renderStep();
+    });
+    document.getElementById("resetBtn").addEventListener("click", () => {
+      stepIndex = 0;
+      renderStep();
+    });
+    renderStep();
+  </script>
+</body>
+</html>
