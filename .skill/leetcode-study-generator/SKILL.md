@@ -229,8 +229,8 @@ The page title and H1 must be `LeetCode 题库`.
 
 The page must contain exactly these major content parts:
 1. **进度**: total problems, covered 考察点 count, highest topic frequency, and total runnable test cases.
-2. **考察点目录**: topics sorted by problem frequency descending; include topic name, frequency, and linked problem titles.
-3. **考察点**: one vertical section per topic, with method overview/rule pattern and its own problem index.
+2. **考察点目录**: topics sorted by problem frequency descending; include topic name, frequency, and linked problem titles. Each topic name must be a clickable anchor link to that topic's detail section.
+3. **考察点**: one vertical section per topic, with a stable `id`, method overview/rule pattern, and its own problem index.
 
 Do not show an `更新规则` section. Do not use side-by-side graph cards. Preserve existing entries, recompute frequencies from all indexed problems, and use stable existing order for ties.
 

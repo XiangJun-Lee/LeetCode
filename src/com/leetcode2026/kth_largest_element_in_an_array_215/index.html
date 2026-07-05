@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LeetCode 215 - 数组中的第K个最大元素</title>
+  <style>
+    :root {
+      --bg: #f6f8fb;
+      --panel: #ffffff;
+      --ink: #172033;
+      --muted: #667085;
+      --line: #d8deea;
+      --blue: #2563eb;
+      --blue-soft: #dbeafe;
+      --green: #15803d;
+      --green-soft: #dcfce7;
+      --orange: #c2410c;
+      --orange-soft: #ffedd5;
+      --red: #b91c1c;
+      --red-soft: #fee2e2;
+      --code-bg: #0b1020;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--bg);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif;
+      line-height: 1.65;
+    }
+
+    header {
+      padding: 42px 20px 34px;
+      color: #fff;
+      background: linear-gradient(135deg, #1e40af 0%, #047857 100%);
+    }
+
+    .wrap {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    h1, h2, h3, p { margin-top: 0; }
+
+    h1 {
+      margin-bottom: 10px;
+      font-size: clamp(30px, 5vw, 46px);
+      line-height: 1.15;
+      letter-spacing: 0;
+    }
+
+    h2 {
+      margin-bottom: 16px;
+      font-size: 24px;
+    }
+
+    h3 {
+      margin-bottom: 8px;
+      font-size: 18px;
+    }
+
+    a {
+      color: var(--blue);
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    a:hover { text-decoration: underline; }
+
+    .subtitle {
+      max-width: 780px;
+      margin-bottom: 0;
+      color: rgba(255, 255, 255, 0.86);
+      font-size: 17px;
+    }
+
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 20px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      color: #063f3a;
+      background: #d9fffb;
+      font-size: 13px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    main { padding: 28px 0 56px; }
+
+    section {
+      margin-top: 18px;
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .three-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .note {
+      padding: 14px 16px;
+      border-left: 4px solid var(--blue);
+      border-radius: 6px;
+      background: var(--blue-soft);
+    }
+
+    .ok {
+      border-left-color: var(--green);
+      background: var(--green-soft);
+    }
+
+    .warn {
+      border-left-color: var(--orange);
+      background: var(--orange-soft);
+    }
+
+    .danger {
+      border-left-color: var(--red);
+      background: var(--red-soft);
+    }
+
+    .muted { color: var(--muted); }
+
+    code {
+      padding: 2px 5px;
+      border-radius: 5px;
+      color: #0f3f8f;
+      background: #eef4ff;
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      font-size: 0.94em;
+    }
+
+    pre {
+      overflow: auto;
+      margin: 14px 0 0;
+      padding: 18px;
+      border-radius: 8px;
+      color: #e5e7eb;
+      background: var(--code-bg);
+      line-height: 1.55;
+    }
+
+    pre code {
+      padding: 0;
+      color: inherit;
+      background: transparent;
+      font-size: 14px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+    }
+
+    th, td {
+      padding: 11px 12px;
+      border: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th { background: #eef3fb; }
+
+    ul, ol {
+      padding-left: 22px;
+      margin-top: 8px;
+      margin-bottom: 0;
+    }
+
+    li + li { margin-top: 6px; }
+
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .flow div {
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfcff;
+      text-align: center;
+      font-weight: 800;
+    }
+
+    .demo {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.9fr);
+      gap: 18px;
+      align-items: start;
+    }
+
+    .array-line {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 12px 0;
+    }
+
+    .cell {
+      min-width: 44px;
+      padding: 9px 10px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #f8fafc;
+      text-align: center;
+      font-weight: 900;
+    }
+
+    .cell.pivot {
+      border-color: #f97316;
+      background: var(--orange-soft);
+    }
+
+    .cell.target {
+      border-color: var(--green);
+      background: var(--green-soft);
+    }
+
+    .cell.discard {
+      color: var(--muted);
+      background: #f1f5f9;
+      opacity: 0.7;
+    }
+
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    button {
+      min-height: 38px;
+      padding: 8px 14px;
+      border: 1px solid #1d4ed8;
+      border-radius: 8px;
+      color: #fff;
+      background: var(--blue);
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    button.secondary {
+      color: var(--blue);
+      background: #fff;
+    }
+
+    footer {
+      padding: 20px;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    @media (max-width: 860px) {
+      .grid, .demo { grid-template-columns: 1fr; }
+      .flow { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 560px) {
+      section { padding: 18px; }
+      .three-grid, .flow { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <h1>LeetCode 215：数组中的第K个最大元素</h1>
+      <p class="subtitle">把“第 k 大”转换成升序数组中的下标 <code>n - k</code>，用快速选择只定位目标，不完整排序。</p>
+      <div class="badge-row">
+        <span class="badge">数组</span>
+        <span class="badge">快速选择</span>
+        <span class="badge">分治</span>
+        <span class="badge">堆</span>
+        <span class="badge">排序</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section>
+      <h2>题目概述</h2>
+      <div class="grid">
+        <div>
+          <p>给定整数数组 <code>nums</code> 和整数 <code>k</code>，返回数组中第 <code>k</code> 个最大的元素。</p>
+          <p>注意这里找的是排序后的第 <code>k</code> 个最大值，不是第 <code>k</code> 个不同的值。</p>
+        </div>
+        <div class="note">
+          <p><strong>关键转换：</strong>第 <code>k</code> 大等价于升序排序后下标 <code>nums.length - k</code> 的元素。</p>
+          <p class="muted">例如长度为 6，找第 2 大，就找升序下标 4。</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>示例拆解</h2>
+      <div class="grid">
+        <div class="note ok">
+          <h3>示例一</h3>
+          <p><code>nums = [3,2,1,5,6,4], k = 2</code></p>
+          <p>升序结果是 <code>[1,2,3,4,5,6]</code>，第 2 大是 <code>5</code>。</p>
+        </div>
+        <div class="note ok">
+          <h3>示例二</h3>
+          <p><code>nums = [3,2,3,1,2,4,5,5,6], k = 4</code></p>
+          <p>升序结果是 <code>[1,2,2,3,3,4,5,5,6]</code>，第 4 大是 <code>4</code>。</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>考察点</h2>
+      <div class="three-grid">
+        <div class="note">
+          <h3>快速选择</h3>
+          <p>只关心目标下标落在哪边，每次 partition 后丢掉另一半。</p>
+        </div>
+        <div class="note">
+          <h3>分治</h3>
+          <p>用 pivot 把数组分成小于区和大于区，递归或循环缩小搜索区间。</p>
+        </div>
+        <div class="note">
+          <h3>堆</h3>
+          <p>也可维护大小为 <code>k</code> 的小顶堆，堆顶就是当前第 k 大。</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>官方题解对比</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>方法</th>
+            <th>复杂度</th>
+            <th>适用场景</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>完整排序</td>
+            <td><code>O(n log n)</code></td>
+            <td>最容易写，但没有利用“只找一个位置”的特点。</td>
+          </tr>
+          <tr>
+            <td>小顶堆</td>
+            <td><code>O(n log k)</code></td>
+            <td>适合数据流或不想修改原数组的场景。</td>
+          </tr>
+          <tr>
+            <td>随机化快速选择</td>
+            <td>平均 <code>O(n)</code></td>
+            <td>本页参考实现。只把目标元素放到正确位置，不保证两侧有序。</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>解题思路</h2>
+      <div class="flow">
+        <div>第 k 大</div>
+        <div>转成 target = n - k</div>
+        <div>partition 定 pivot</div>
+        <div>缩小左右边界</div>
+      </div>
+      <p style="margin-top: 16px;">快速选择和快速排序共用 partition，但目标不同：快速排序要让两边继续有序；快速选择只需要判断 pivot 的最终位置和 <code>target</code> 的关系。</p>
+      <ul>
+        <li>如果 <code>pivotIndex == target</code>，答案就是 <code>nums[pivotIndex]</code>。</li>
+        <li>如果 <code>pivotIndex &lt; target</code>，目标在右侧，令 <code>left = pivotIndex + 1</code>。</li>
+        <li>如果 <code>pivotIndex &gt; target</code>，目标在左侧，令 <code>right = pivotIndex - 1</code>。</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>参考实现</h2>
+      <pre><code>import java.util.Random;
+
+class Solution {
+    private final Random random = new Random();
+
+    public int findKthLargest(int[] nums, int k) {
+        // 第 k 大转换为升序数组中的目标下标。
+        // 例如 n = 6, k = 2，目标是下标 4，也就是第二大的元素。
+        int target = nums.length - k;
+        int left = 0;
+        int right = nums.length - 1;
+
+        while (left &lt;= right) {
+            // 随机 pivot 能降低退化到 O(n^2) 的概率。
+            int pivotIndex = left + random.nextInt(right - left + 1);
+            int finalIndex = partition(nums, left, right, pivotIndex);
+
+            // partition 后，finalIndex 左边都小于 pivot，
+            // 右边都大于等于 pivot，因此 pivot 已经在升序中的正确位置。
+            if (finalIndex == target) {
+                return nums[finalIndex];
+            }
+            if (finalIndex &lt; target) {
+                // pivot 太靠左，说明第 k 大还在右半边。
+                left = finalIndex + 1;
+            } else {
+                // pivot 太靠右，说明目标在左半边。
+                right = finalIndex - 1;
+            }
+        }
+
+        return -1;
+    }
+
+    private int partition(int[] nums, int left, int right, int pivotIndex) {
+        int pivot = nums[pivotIndex];
+
+        // 先把 pivot 放到末尾，方便扫描区间 [left, right - 1]。
+        swap(nums, pivotIndex, right);
+
+        // storeIndex 表示下一个“小于 pivot”的元素应该放置的位置。
+        int storeIndex = left;
+        for (int i = left; i &lt; right; i++) {
+            if (nums[i] &lt; pivot) {
+                swap(nums, storeIndex, i);
+                storeIndex++;
+            }
+        }
+
+        // 把 pivot 放回分界点，此时它左边都小于它，右边都大于等于它。
+        swap(nums, storeIndex, right);
+        return storeIndex;
+    }
+
+    private void swap(int[] nums, int i, int j) {
+        int temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
+    }
+}</code></pre>
+    </section>
+
+    <section>
+      <h2>核心变量/状态</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>变量</th>
+            <th>含义</th>
+            <th>更新时机</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>target</code></td>
+            <td>第 k 大在升序数组中的下标</td>
+            <td>初始化为 <code>nums.length - k</code>，之后不变</td>
+          </tr>
+          <tr>
+            <td><code>left/right</code></td>
+            <td>当前还可能包含答案的闭区间</td>
+            <td>根据 <code>finalIndex</code> 和 <code>target</code> 的大小关系收缩</td>
+          </tr>
+          <tr>
+            <td><code>pivot</code></td>
+            <td>本轮分区基准值</td>
+            <td>每轮随机选择，partition 后落到最终位置</td>
+          </tr>
+          <tr>
+            <td><code>storeIndex</code></td>
+            <td>小于 pivot 区域的下一个写入位置</td>
+            <td>每遇到一个小于 pivot 的元素就右移一格</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>执行过程可视化</h2>
+      <div class="demo">
+        <div>
+          <p>示例：<code>[3,2,1,5,6,4], k = 2</code>，目标升序下标是 <code>4</code>。</p>
+          <div class="array-line" id="arrayLine"></div>
+          <div class="note" id="stepText"></div>
+          <div class="controls">
+            <button type="button" id="nextBtn">下一步</button>
+            <button type="button" class="secondary" id="resetBtn">重置</button>
+          </div>
+        </div>
+        <div class="note warn">
+          <h3>看图重点</h3>
+          <p>绿色是目标下标，橙色是本轮 pivot。每次 pivot 落位后，只保留可能包含目标下标的一侧。</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>易错点</h2>
+      <ul>
+        <li><strong>把第 k 大当成下标 k：</strong>升序目标下标是 <code>n - k</code>。</li>
+        <li><strong>partition 后继续查两边：</strong>快速选择只查目标所在的一边。</li>
+        <li><strong>忘记重复元素：</strong>题目不是找第 k 个不同元素，重复值正常参与排名。</li>
+        <li><strong>固定 pivot：</strong>有序或接近有序数组容易退化，随机 pivot 更稳。</li>
+        <li><strong>误以为两边有序：</strong>partition 只保证大小关系，不保证左右子数组内部有序。</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>复杂度分析</h2>
+      <div class="grid">
+        <div class="note ok">
+          <h3>时间复杂度</h3>
+          <p>随机化快速选择平均 <code>O(n)</code>，最坏 <code>O(n^2)</code>。</p>
+        </div>
+        <div class="note ok">
+          <h3>空间复杂度</h3>
+          <p>迭代写法只使用常数额外变量，空间复杂度 <code>O(1)</code>。</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>练习文件</h2>
+      <p>练习代码保持无提示，请在 <code>Solution.java</code> 中完成实现。</p>
+      <table>
+        <thead>
+          <tr>
+            <th>文件</th>
+            <th>用途</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><a href="Solution.java">Solution.java</a></td>
+            <td>无提示练习入口</td>
+          </tr>
+          <tr>
+            <td><a href="SolutionTest.java">SolutionTest.java</a></td>
+            <td>可直接运行的测试用例</td>
+          </tr>
+        </tbody>
+      </table>
+      <p style="margin-top: 16px;">运行命令：</p>
+      <pre><code>cd /Users/xiangjun_lee/IdeaProjects/LeetCode/src &amp;&amp; javac com/leetcode2026/kth_largest_element_in_an_array_215/Solution.java com/leetcode2026/kth_largest_element_in_an_array_215/SolutionTest.java &amp;&amp; java com.leetcode2026.kth_largest_element_in_an_array_215.SolutionTest</code></pre>
+      <p style="margin-top: 16px;"><a href="../leetcode-problem-bank.html">返回 LeetCode 题库</a></p>
+    </section>
+
+    <section>
+      <h2>来源链接</h2>
+      <ul>
+        <li><a href="https://leetcode.cn/problems/kth-largest-element-in-an-array/">LeetCode 215 题目页</a></li>
+        <li><a href="https://leetcode.cn/problems/kth-largest-element-in-an-array/solutions/">LeetCode 215 题解列表</a></li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    src/com/leetcode2026/kth_largest_element_in_an_array_215/index.html
+  </footer>
+
+  <script>
+    const steps = [
+      {
+        values: [3, 2, 1, 5, 6, 4],
+        pivot: -1,
+        target: 4,
+        discard: [],
+        text: "初始数组长度为 6，k = 2，所以目标升序下标 target = 4。"
+      },
+      {
+        values: [1, 2, 3, 5, 6, 4],
+        pivot: 2,
+        target: 4,
+        discard: [0, 1, 2],
+        text: "假设本轮 pivot = 3，partition 后它落在下标 2。target = 4 在右边，左侧可以丢弃。"
+      },
+      {
+        values: [1, 2, 3, 4, 5, 6],
+        pivot: 4,
+        target: 4,
+        discard: [0, 1, 2, 3, 5],
+        text: "在右侧继续 partition，pivot = 5 落在下标 4，正好等于 target，答案是 5。"
+      }
+    ];
+
+    let stepIndex = 0;
+    const arrayLine = document.getElementById("arrayLine");
+    const stepText = document.getElementById("stepText");
+    const nextBtn = document.getElementById("nextBtn");
+    const resetBtn = document.getElementById("resetBtn");
+
+    function render() {
+      const step = steps[stepIndex];
+      arrayLine.innerHTML = "";
+      step.values.forEach((value, index) => {
+        const cell = document.createElement("div");
+        cell.className = "cell";
+        if (index === step.pivot) cell.classList.add("pivot");
+        if (index === step.target) cell.classList.add("target");
+        if (step.discard.includes(index)) cell.classList.add("discard");
+        cell.textContent = value;
+        arrayLine.appendChild(cell);
+      });
+      stepText.textContent = step.text;
+    }
+
+    nextBtn.addEventListener("click", () => {
+      stepIndex = Math.min(stepIndex + 1, steps.length - 1);
+      render();
+    });
+
+    resetBtn.addEventListener("click", () => {
+      stepIndex = 0;
+      render();
+    });
+
+    render();
+  </script>
+</body>
+</html>
