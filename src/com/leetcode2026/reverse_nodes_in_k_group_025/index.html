@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LeetCode 25：K 个一组翻转链表</title>
+  <style>
+    :root {
+      --bg: #f6f8fb;
+      --panel: #ffffff;
+      --ink: #172033;
+      --muted: #667085;
+      --line: #d8deea;
+      --blue: #2563eb;
+      --blue-soft: #dbeafe;
+      --green-soft: #dcfce7;
+      --orange-soft: #ffedd5;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--bg);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif;
+      line-height: 1.68;
+    }
+
+    header {
+      padding: 42px 20px 30px;
+      color: #fff;
+      background: linear-gradient(135deg, #1e40af 0%, #047857 100%);
+    }
+
+    .wrap {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    h1, h2, h3, p { margin-top: 0; }
+
+    h1 {
+      margin-bottom: 10px;
+      font-size: clamp(30px, 5vw, 46px);
+      line-height: 1.15;
+      letter-spacing: 0;
+    }
+
+    h2 {
+      margin-bottom: 14px;
+      font-size: 24px;
+    }
+
+    h3 {
+      margin-bottom: 8px;
+      font-size: 18px;
+    }
+
+    a {
+      color: var(--blue);
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    a:hover { text-decoration: underline; }
+
+    .subtitle {
+      max-width: 820px;
+      margin-bottom: 0;
+      color: rgba(255, 255, 255, 0.86);
+      font-size: 17px;
+    }
+
+    main { padding: 28px 0 56px; }
+
+    section {
+      margin-top: 18px;
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .mini {
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfcff;
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 3px 9px;
+      border-radius: 999px;
+      color: #0f315f;
+      background: #e0edff;
+      font-size: 13px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .note {
+      padding: 14px 16px;
+      border-left: 4px solid var(--blue);
+      border-radius: 6px;
+      background: var(--blue-soft);
+    }
+
+    .warn {
+      padding: 14px 16px;
+      border-left: 4px solid #ea580c;
+      border-radius: 6px;
+      background: var(--orange-soft);
+    }
+
+    code {
+      padding: 2px 5px;
+      border-radius: 5px;
+      color: #0f3f8f;
+      background: #eef4ff;
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      font-size: 0.94em;
+    }
+
+    pre {
+      overflow-x: auto;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #101828;
+      color: #edf2ff;
+      line-height: 1.55;
+    }
+
+    pre code {
+      padding: 0;
+      color: inherit;
+      background: transparent;
+      font-size: 13px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+    }
+
+    th, td {
+      padding: 12px;
+      border: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th { background: #eef3fb; }
+
+    .viz-panel {
+      display: grid;
+      gap: 14px;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfcff;
+    }
+
+    .nodes {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .node {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 42px;
+      height: 42px;
+      border: 2px solid #94a3b8;
+      border-radius: 8px;
+      background: #fff;
+      font-weight: 900;
+    }
+
+    .node.active {
+      border-color: #2563eb;
+      background: var(--blue-soft);
+    }
+
+    .node.done {
+      border-color: #16a34a;
+      background: var(--green-soft);
+    }
+
+    .arrow {
+      color: var(--muted);
+      font-weight: 900;
+    }
+
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    button {
+      min-height: 36px;
+      padding: 7px 12px;
+      border: 1px solid #1d4ed8;
+      border-radius: 6px;
+      color: #fff;
+      background: #2563eb;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    button.secondary {
+      color: #1d4ed8;
+      background: #fff;
+    }
+
+    footer {
+      padding: 20px;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    @media (max-width: 760px) {
+      .grid { grid-template-columns: 1fr; }
+      section { padding: 18px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <h1>LeetCode 25：K 个一组翻转链表</h1>
+      <p class="subtitle">链表分组、原地翻转、边界保护。先找到完整的一组，把这一组临时断开，复用熟悉的反转链表函数，再把前后链路接回去。</p>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section>
+      <h2>题目概述</h2>
+      <p>给定链表头节点 <code>head</code> 和整数 <code>k</code>，每 <code>k</code> 个节点翻转一次，最后不足 <code>k</code> 个节点保持原顺序。题目要求不能只交换节点值，必须真实改变节点连接。</p>
+      <div class="tag-row">
+        <span class="tag">链表</span>
+        <span class="tag">双指针</span>
+        <span class="tag">原地修改</span>
+        <span class="tag">分组处理</span>
+        <span class="tag">迭代</span>
+      </div>
+    </section>
+
+    <section>
+      <h2>示例拆解</h2>
+      <div class="grid">
+        <div class="mini">
+          <h3>示例 1</h3>
+          <p><code>head = [1,2,3,4,5], k = 2</code></p>
+          <p>每两个节点一组：<code>[1,2]</code> 变成 <code>[2,1]</code>，<code>[3,4]</code> 变成 <code>[4,3]</code>，剩余 <code>[5]</code> 不足一组，输出 <code>[2,1,4,3,5]</code>。</p>
+        </div>
+        <div class="mini">
+          <h3>示例 2</h3>
+          <p><code>head = [1,2,3,4,5], k = 3</code></p>
+          <p>前三个节点翻转成 <code>[3,2,1]</code>，尾部 <code>[4,5]</code> 不足 <code>k</code> 个，保持不动，输出 <code>[3,2,1,4,5]</code>。</p>
+        </div>
+      </div>
+      <p>约束：链表节点数 <code>n</code> 满足 <code>1 &lt;= n &lt;= 5000</code>，节点值 <code>0 &lt;= Node.val &lt;= 1000</code>，并且 <code>1 &lt;= k &lt;= n</code>。</p>
+    </section>
+
+    <section>
+      <h2>考察点</h2>
+      <p>这道题考察链表原地改指针、分组边界识别、哑节点简化头节点变化，以及对“尾部不足 k 个节点不能翻转”的处理。更容易理解的模式是：先确认下一组长度足够，再把这一段从原链表中临时断开，调用普通的 <code>reverseList</code> 翻转，最后把上一段、翻转段、下一段重新接起来。</p>
+    </section>
+
+    <section>
+      <h2>官方题解对比</h2>
+      <div class="note">
+        <p>LeetCode 官方题解提供了模拟式的链表分组翻转思路：用哑节点维护答案头部，逐组定位 <code>head</code> 与 <code>tail</code>，翻转当前闭区间后接回原链表。这里采用同一复杂度级别的迭代写法，时间复杂度 <code>O(n)</code>，额外空间 <code>O(1)</code>；它把“翻转一组”和“接回链表”拆开讲，比把翻转边界揉进同一个循环里更直观。</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>解题思路</h2>
+      <p>暴力地把链表节点放进数组再按组改顺序很直观，但需要额外空间，而且没有练到链表指针操作。优化做法是只在链表上移动引用。</p>
+      <p>使用 <code>dummy</code> 指向原头节点，<code>prevGroupEnd</code> 表示上一组翻转后的尾节点，也就是当前待处理组的前驱。每轮先从 <code>prevGroupEnd</code> 出发向后走 <code>k</code> 步找到 <code>kthNode</code>。如果过程中遇到 <code>null</code>，说明剩余节点不足 <code>k</code> 个，直接返回答案。</p>
+      <p>当一组完整存在时，先保存 <code>groupStart = prevGroupEnd.next</code> 和 <code>nextGroupStart = kthNode.next</code>。然后执行 <code>kthNode.next = null</code>，把当前组临时变成一条独立链表，调用普通的 <code>reverseList(groupStart)</code>。翻转后，<code>prevGroupEnd.next</code> 接新组头，<code>groupStart.next</code> 接下一组开头，最后把 <code>prevGroupEnd</code> 移到 <code>groupStart</code> 继续下一轮。</p>
+    </section>
+
+    <section>
+      <h2>参考实现</h2>
+      <pre><code>package com.leetcode2026.reverse_nodes_in_k_group_025;
+
+public class Solution {
+    public ListNode reverseKGroup(ListNode head, int k) {
+        // 空链表或 k = 1 时不需要改动；提前返回也避免后续循环做无意义工作。
+        if (head == null || k &lt;= 1) {
+            return head;
+        }
+
+        // dummy 让第一组翻转后也能通过“上一组尾节点”统一接回。
+        ListNode dummy = new ListNode(0, head);
+        ListNode prevGroupEnd = dummy;
+
+        while (true) {
+            // 从上一组尾节点向后数 k 个，确认当前组是否完整。
+            ListNode kthNode = prevGroupEnd;
+            for (int i = 0; i &lt; k; i++) {
+                kthNode = kthNode.next;
+                if (kthNode == null) {
+                    return dummy.next;
+                }
+            }
+
+            // groupStart 会在翻转后变成当前组的尾；nextGroupStart 用来接回后半段。
+            ListNode groupStart = prevGroupEnd.next;
+            ListNode nextGroupStart = kthNode.next;
+
+            // 断开当前组，让 reverseList 可以按普通整链表反转来处理。
+            kthNode.next = null;
+            prevGroupEnd.next = reverseList(groupStart);
+            groupStart.next = nextGroupStart;
+
+            // 旧组头已经成为新组尾，下一轮从这里继续找 k 个节点。
+            prevGroupEnd = groupStart;
+        }
+    }
+
+    private ListNode reverseList(ListNode head) {
+        ListNode prev = null;
+        ListNode curr = head;
+        while (curr != null) {
+            ListNode next = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = next;
+        }
+        return prev;
+    }
+}</code></pre>
+    </section>
+
+    <section>
+      <h2>核心变量/状态</h2>
+      <table>
+        <thead>
+          <tr><th>变量</th><th>含义</th><th>更新时机</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>dummy</code></td><td>固定的哑节点，避免第一组翻转后丢失新头。</td><td>初始化后不再移动。</td></tr>
+          <tr><td><code>prevGroupEnd</code></td><td>上一组翻转后的尾节点，也是当前组的前驱。</td><td>每组翻转后移动到 <code>groupStart</code>。</td></tr>
+          <tr><td><code>kthNode</code></td><td>当前组第 k 个节点，用来判断这一组是否完整。</td><td>每轮从 <code>prevGroupEnd</code> 向后走 <code>k</code> 步。</td></tr>
+          <tr><td><code>groupStart</code></td><td>当前组原本的头节点，翻转后会变成这一组的尾节点。</td><td>翻转前保存，翻转后用它接 <code>nextGroupStart</code>。</td></tr>
+          <tr><td><code>nextGroupStart</code></td><td>下一组的头节点。</td><td>执行 <code>kthNode.next = null</code> 前必须先保存。</td></tr>
+          <tr><td><code>reverseList</code></td><td>普通的整链表反转函数。</td><td>当前组被临时断开后调用。</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>执行过程可视化</h2>
+      <div class="viz-panel">
+        <div class="nodes" id="nodes"></div>
+        <p id="vizText"></p>
+        <div class="controls">
+          <button type="button" id="nextStep">下一步</button>
+          <button type="button" class="secondary" id="resetStep">重置</button>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>易错点</h2>
+      <ul>
+        <li>没有先检查剩余节点是否达到 <code>k</code> 个，导致尾部不足一组也被翻转。</li>
+        <li>执行 <code>kthNode.next = null</code> 前没有保存 <code>nextGroupStart</code>，导致翻转后找不到下一组入口。</li>
+        <li>翻转后忘记让 <code>groupStart.next</code> 接回 <code>nextGroupStart</code>，链表会在当前组尾部断掉。</li>
+        <li>把 <code>prevGroupEnd</code> 移到新组头，实际上下一轮前驱应该是旧组头 <code>groupStart</code>，也就是当前组翻转后的尾节点。</li>
+        <li><code>k = 1</code> 时应该保持原链表，同时循环仍要能正常推进。</li>
+        <li>测试只看节点值，不检查是否产生环，容易漏掉指针接错造成的死循环。</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>复杂度分析</h2>
+      <p>每个节点在查找分组和组内翻转中被访问常数次，因此时间复杂度是 <code>O(n)</code>。只使用若干引用变量，额外空间复杂度是 <code>O(1)</code>。</p>
+    </section>
+
+    <section>
+      <h2>练习文件</h2>
+      <p>练习代码：<a href="Solution.java">Solution.java</a>。测试文件：<a href="SolutionTest.java">SolutionTest.java</a>。返回题库：<a href="../leetcode-problem-bank.html">leetcode-problem-bank.html</a>。</p>
+      <p>运行命令：</p>
+      <pre><code>cd src &amp;&amp; javac com/leetcode2026/reverse_nodes_in_k_group_025/Solution.java com/leetcode2026/reverse_nodes_in_k_group_025/SolutionTest.java &amp;&amp; java com.leetcode2026.reverse_nodes_in_k_group_025.SolutionTest</code></pre>
+      <p class="warn">当前 <code>Solution.java</code> 是无提示练习骨架，能编译，但测试会在第一个需要翻转的用例上失败。</p>
+    </section>
+
+    <section>
+      <h2>来源链接</h2>
+      <p>题目来源：<a href="https://leetcode.cn/problems/reverse-nodes-in-k-group/description/">LeetCode 中国 25. K 个一组翻转链表</a>。官方题解入口：<a href="https://leetcode.cn/problems/reverse-nodes-in-k-group/solutions/">LeetCode 中国题解页</a>。</p>
+    </section>
+  </main>
+
+  <footer>LeetCode 题库 · 链表专题</footer>
+
+  <script>
+    const states = [
+      {
+        values: [1, 2, 3, 4, 5],
+        active: [0, 1],
+        done: [],
+        text: "k = 2，先确认第一组 [1,2] 长度足够，prevGroupEnd 在 dummy，kthNode 指向 2。"
+      },
+      {
+        values: [2, 1, 3, 4, 5],
+        active: [0, 1],
+        done: [0, 1],
+        text: "保存 nextGroupStart = 3，断开 2 -> 3 后调用 reverseList，[1,2] 变成 [2,1]。"
+      },
+      {
+        values: [2, 1, 3, 4, 5],
+        active: [2, 3],
+        done: [0, 1],
+        text: "prevGroupEnd.next 接到新组头 2，groupStart 也就是 1 接回下一组头 3。"
+      },
+      {
+        values: [2, 1, 4, 3, 5],
+        active: [2, 3],
+        done: [0, 1, 2, 3],
+        text: "prevGroupEnd 移到 1，再处理 [3,4]：断开、reverseList、接回尾部 5。"
+      },
+      {
+        values: [2, 1, 4, 3, 5],
+        active: [4],
+        done: [0, 1, 2, 3],
+        text: "prevGroupEnd 移到 3，剩余 [5] 不足 k 个，返回最终链表 [2,1,4,3,5]。"
+      }
+    ];
+
+    let step = 0;
+    const nodes = document.getElementById("nodes");
+    const vizText = document.getElementById("vizText");
+
+    function render() {
+      const state = states[step];
+      nodes.innerHTML = "";
+      state.values.forEach((value, index) => {
+        const node = document.createElement("span");
+        node.className = "node";
+        if (state.active.includes(index)) node.classList.add("active");
+        if (state.done.includes(index)) node.classList.add("done");
+        node.textContent = value;
+        nodes.appendChild(node);
+        if (index < state.values.length - 1) {
+          const arrow = document.createElement("span");
+          arrow.className = "arrow";
+          arrow.textContent = "->";
+          nodes.appendChild(arrow);
+        }
+      });
+      vizText.textContent = state.text;
+    }
+
+    document.getElementById("nextStep").addEventListener("click", () => {
+      step = (step + 1) % states.length;
+      render();
+    });
+
+    document.getElementById("resetStep").addEventListener("click", () => {
+      step = 0;
+      render();
+    });
+
+    render();
+  </script>
+</body>
+</html>
