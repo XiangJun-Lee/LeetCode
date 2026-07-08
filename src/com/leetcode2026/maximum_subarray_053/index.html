@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LeetCode 53 - 最大子数组和</title>
+  <style>
+    :root {
+      --bg: #f6f8fb;
+      --panel: #ffffff;
+      --ink: #172033;
+      --muted: #667085;
+      --line: #d8deea;
+      --blue: #2563eb;
+      --blue-soft: #dbeafe;
+      --green-soft: #dcfce7;
+      --orange-soft: #ffedd5;
+      --code-bg: #0b1020;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--bg);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif;
+      line-height: 1.65;
+    }
+
+    header {
+      color: #fff;
+      background: linear-gradient(135deg, #1e40af 0%, #047857 100%);
+      padding: 42px 20px 34px;
+    }
+
+    .wrap {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    h1, h2, h3, p { margin-top: 0; }
+
+    h1 {
+      margin-bottom: 10px;
+      font-size: clamp(28px, 5vw, 46px);
+      line-height: 1.15;
+      letter-spacing: 0;
+    }
+
+    h2 {
+      margin-bottom: 16px;
+      font-size: 24px;
+    }
+
+    h3 {
+      margin-bottom: 8px;
+      font-size: 18px;
+    }
+
+    a {
+      color: var(--blue);
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    a:hover { text-decoration: underline; }
+
+    .subtitle {
+      max-width: 780px;
+      margin-bottom: 0;
+      color: rgba(255, 255, 255, 0.86);
+      font-size: 17px;
+    }
+
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 20px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      color: #063f3a;
+      background: #d9fffb;
+      font-size: 13px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    main { padding: 28px 0 56px; }
+
+    section {
+      margin-top: 18px;
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .three-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .note {
+      padding: 14px 16px;
+      border-left: 4px solid var(--blue);
+      border-radius: 6px;
+      background: var(--blue-soft);
+    }
+
+    .ok {
+      border-left-color: #15803d;
+      background: var(--green-soft);
+    }
+
+    .warn {
+      border-left-color: #c2410c;
+      background: var(--orange-soft);
+    }
+
+    .muted { color: var(--muted); }
+
+    ul, ol {
+      padding-left: 22px;
+      margin-top: 8px;
+      margin-bottom: 0;
+    }
+
+    li + li { margin-top: 6px; }
+
+    code {
+      padding: 2px 5px;
+      border-radius: 5px;
+      color: #0f3f8f;
+      background: #eef4ff;
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      font-size: 0.94em;
+    }
+
+    pre {
+      overflow: auto;
+      margin: 14px 0 0;
+      padding: 18px;
+      border-radius: 8px;
+      color: #e5e7eb;
+      background: var(--code-bg);
+      line-height: 1.55;
+    }
+
+    pre code {
+      padding: 0;
+      color: inherit;
+      background: transparent;
+      font-size: 14px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+    }
+
+    th, td {
+      padding: 12px;
+      border: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th { background: #eef3fb; }
+
+    .mini {
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfcff;
+    }
+
+    .viz-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    button {
+      min-height: 36px;
+      padding: 7px 13px;
+      border: 1px solid #1d4ed8;
+      border-radius: 8px;
+      color: #fff;
+      background: var(--blue);
+      font: inherit;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    button.secondary {
+      color: var(--blue);
+      background: #fff;
+    }
+
+    .bars {
+      display: grid;
+      grid-template-columns: repeat(9, minmax(28px, 1fr));
+      gap: 8px;
+      align-items: end;
+      min-height: 132px;
+      margin-top: 14px;
+    }
+
+    .bar {
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      min-height: 28px;
+      padding: 6px 2px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      color: #172033;
+      background: #eef3fb;
+      font-weight: 800;
+      transition: 160ms ease;
+    }
+
+    .bar.active {
+      border-color: #1d4ed8;
+      background: var(--blue-soft);
+      transform: translateY(-4px);
+    }
+
+    .bar.best {
+      border-color: #15803d;
+      background: var(--green-soft);
+    }
+
+    .state {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .state strong {
+      display: block;
+      font-size: 24px;
+      line-height: 1.15;
+    }
+
+    footer {
+      padding: 20px;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    @media (max-width: 760px) {
+      .grid, .three-grid, .state { grid-template-columns: 1fr; }
+      section { padding: 18px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <h1>LeetCode 53：最大子数组和</h1>
+      <p class="subtitle">在整数数组中找到和最大的非空连续子数组，只返回这个最大和。</p>
+      <div class="badge-row">
+        <span class="badge">数组</span>
+        <span class="badge">动态规划</span>
+        <span class="badge">Kadane 算法</span>
+        <span class="badge">分治</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section>
+      <h2>题目概述</h2>
+      <p>给定整数数组 <code>nums</code>，请找出一个具有最大和的连续子数组，子数组最少包含一个元素，返回其最大和。连续是关键：可以截取一段相邻元素，但不能跳着选。</p>
+      <div class="note">
+        <p>本题源自 <a href="https://leetcode.cn/problems/maximum-subarray/">LeetCode 53 最大子数组和</a>，官方题解提供了动态规划和分治两种主线。练习时优先掌握 O(n) 时间、O(1) 空间的一维动态规划写法。</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>示例拆解</h2>
+      <div class="grid">
+        <div class="mini">
+          <h3>示例 1</h3>
+          <p><code>nums = [-2,1,-3,4,-1,2,1,-5,4]</code></p>
+          <p>输出 <code>6</code>，因为连续子数组 <code>[4,-1,2,1]</code> 的和最大。</p>
+        </div>
+        <div class="mini">
+          <h3>示例 2</h3>
+          <p><code>nums = [1]</code></p>
+          <p>输出 <code>1</code>。非空数组只有一个元素时，答案就是它本身。</p>
+        </div>
+        <div class="mini">
+          <h3>示例 3</h3>
+          <p><code>nums = [5,4,-1,7,8]</code></p>
+          <p>输出 <code>23</code>。整段数组虽然包含一个负数，但整体收益仍最大。</p>
+        </div>
+        <div class="mini">
+          <h3>负数边界</h3>
+          <p><code>nums = [-2,-1,-3]</code></p>
+          <p>输出 <code>-1</code>。不能返回空数组的 <code>0</code>，必须选择一个非空子数组。</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>考察点</h2>
+      <ul>
+        <li>数组连续区间：答案必须来自一段相邻元素。</li>
+        <li>动态规划：维护“以当前位置结尾的最大子数组和”。</li>
+        <li>Kadane 算法：当旧前缀已经拖累当前值时，从当前元素重新开始。</li>
+        <li>分治：官方也给出线段信息合并思路，可扩展到区间查询类问题。</li>
+        <li>边界处理：全负数、单元素、包含 0、最优段位于开头或末尾。</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>官方题解对比</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>方法</th>
+            <th>核心状态</th>
+            <th>复杂度</th>
+            <th>练习建议</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>动态规划 / Kadane</td>
+            <td><code>current = max(nums[i], current + nums[i])</code>，<code>best = max(best, current)</code></td>
+            <td>时间 O(n)，空间 O(1)</td>
+            <td>作为主解法，代码短但非常考验初始化和更新顺序。</td>
+          </tr>
+          <tr>
+            <td>分治</td>
+            <td>每段维护区间和、最大前缀和、最大后缀和、最大子段和。</td>
+            <td>时间 O(n)，递归空间 O(log n)</td>
+            <td>适合理解线段树合并思想，不是本练习文件的首选实现。</td>
+          </tr>
+          <tr>
+            <td>暴力枚举</td>
+            <td>枚举左右端点并求和。</td>
+            <td>通常 O(n²) 或 O(n³)</td>
+            <td>只用于推导，不满足官方最优复杂度。</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>解题思路</h2>
+      <ol>
+        <li>如果枚举每个子数组，重复计算太多；我们真正需要的是“到当前位置为止，必须以当前位置结尾的最好结果”。</li>
+        <li>设 <code>current</code> 表示以当前元素结尾的最大连续和。来到 <code>nums[i]</code> 时只有两种选择：接在前一段后面，或者从当前元素重新开始。</li>
+        <li>因此 <code>current = Math.max(nums[i], current + nums[i])</code>。如果前一段为负，重新开始更优；如果前一段为正，继续累加更优。</li>
+        <li><code>best</code> 记录扫描过程中见过的最大 <code>current</code>，最终返回 <code>best</code>。</li>
+      </ol>
+      <div class="warn">
+        <p>初始化要用 <code>nums[0]</code>，不能用 <code>0</code>，否则全负数数组会错误返回 <code>0</code>。</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>参考实现</h2>
+      <pre><code>package com.leetcode2026.maximum_subarray_053;
+
+public class Solution {
+    public int maxSubArray(int[] nums) {
+        // current 表示“必须以当前下标结尾”的最大连续子数组和。
+        int current = nums[0];
+        // best 表示扫描到当前位置时，全局见过的最大连续子数组和。
+        int best = nums[0];
+
+        for (int i = 1; i &lt; nums.length; i++) {
+            int value = nums[i];
+            // 如果 current + value 不如 value 自己，说明前面的连续段已经变成负担。
+            current = Math.max(value, current + value);
+            // current 更新后才有资格参与全局答案，因为它代表以 i 结尾的最优段。
+            best = Math.max(best, current);
+        }
+
+        return best;
+    }
+}</code></pre>
+    </section>
+
+    <section>
+      <h2>核心变量/状态</h2>
+      <div class="three-grid">
+        <div class="mini">
+          <h3><code>current</code></h3>
+          <p>必须以当前位置结尾的最大子数组和。它不是全局答案，而是下一轮状态转移的依据。</p>
+        </div>
+        <div class="mini">
+          <h3><code>best</code></h3>
+          <p>扫描过程中出现过的最大 <code>current</code>。每轮更新 <code>current</code> 后再更新它。</p>
+        </div>
+        <div class="mini">
+          <h3><code>nums[i]</code></h3>
+          <p>当前元素。它决定是重启连续段，还是接到上一段后面。</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>执行过程可视化</h2>
+      <p class="muted">数组使用官方示例：<code>[-2,1,-3,4,-1,2,1,-5,4]</code>。点击下一步观察 <code>current</code> 与 <code>best</code> 的变化。</p>
+      <div class="bars" id="bars"></div>
+      <div class="state">
+        <div class="mini">
+          <span class="muted">当前下标</span>
+          <strong id="idx">0</strong>
+        </div>
+        <div class="mini">
+          <span class="muted">current</span>
+          <strong id="current">-2</strong>
+        </div>
+        <div class="mini">
+          <span class="muted">best</span>
+          <strong id="best">-2</strong>
+        </div>
+      </div>
+      <div class="viz-controls">
+        <button type="button" id="next">下一步</button>
+        <button type="button" class="secondary" id="reset">重置</button>
+      </div>
+    </section>
+
+    <section>
+      <h2>易错点</h2>
+      <ul>
+        <li>把答案初始化为 <code>0</code>，导致全负数用例错误。</li>
+        <li>误以为负数一定要断开；如果前面累计值仍为正，跨过小负数可能得到更大和。</li>
+        <li>把“子数组”和“子序列”混淆，错误跳过中间元素。</li>
+        <li>先更新 <code>best</code> 再更新 <code>current</code>，会漏掉以当前元素结尾的新答案。</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>复杂度分析</h2>
+      <div class="grid">
+        <div class="note ok">
+          <p><strong>时间复杂度：O(n)</strong></p>
+          <p>只线性扫描数组一次。</p>
+        </div>
+        <div class="note ok">
+          <p><strong>空间复杂度：O(1)</strong></p>
+          <p>只维护两个整数状态，不需要额外数组。</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>练习文件</h2>
+      <p>练习代码保持无提示骨架：<a href="Solution.java">Solution.java</a>。测试文件：<a href="SolutionTest.java">SolutionTest.java</a>。</p>
+      <p>从项目 <code>src</code> 目录运行：</p>
+      <pre><code>javac com/leetcode2026/maximum_subarray_053/Solution.java com/leetcode2026/maximum_subarray_053/SolutionTest.java &amp;&amp; java com.leetcode2026.maximum_subarray_053.SolutionTest</code></pre>
+      <p>返回题库：<a href="../leetcode-problem-bank.html">leetcode-problem-bank.html</a></p>
+    </section>
+
+    <section>
+      <h2>来源链接</h2>
+      <ul>
+        <li>题目：<a href="https://leetcode.cn/problems/maximum-subarray/">https://leetcode.cn/problems/maximum-subarray/</a></li>
+        <li>官方题解：<a href="https://leetcode.cn/problems/maximum-subarray/solutions/228009/zui-da-zi-xu-he-by-leetcode-solution/">https://leetcode.cn/problems/maximum-subarray/solutions/228009/zui-da-zi-xu-he-by-leetcode-solution/</a></li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    src/com/leetcode2026/maximum_subarray_053/index.html
+  </footer>
+
+  <script>
+    const nums = [-2, 1, -3, 4, -1, 2, 1, -5, 4];
+    let index = 0;
+    let current = nums[0];
+    let best = nums[0];
+
+    const bars = document.getElementById("bars");
+    const idxEl = document.getElementById("idx");
+    const currentEl = document.getElementById("current");
+    const bestEl = document.getElementById("best");
+
+    function render() {
+      bars.innerHTML = "";
+      nums.forEach((num, i) => {
+        const bar = document.createElement("div");
+        bar.className = "bar";
+        if (i === index) bar.classList.add("active");
+        if (i <= index && best === 6 && i >= 3 && i <= 6) bar.classList.add("best");
+        bar.style.height = `${Math.max(28, Math.abs(num) * 14 + 28)}px`;
+        bar.textContent = num;
+        bars.appendChild(bar);
+      });
+      idxEl.textContent = index;
+      currentEl.textContent = current;
+      bestEl.textContent = best;
+    }
+
+    document.getElementById("next").addEventListener("click", () => {
+      if (index + 1 >= nums.length) return;
+      index += 1;
+      current = Math.max(nums[index], current + nums[index]);
+      best = Math.max(best, current);
+      render();
+    });
+
+    document.getElementById("reset").addEventListener("click", () => {
+      index = 0;
+      current = nums[0];
+      best = nums[0];
+      render();
+    });
+
+    render();
+  </script>
+</body>
+</html>
